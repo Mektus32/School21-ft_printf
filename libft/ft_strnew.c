@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ojessi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/06 20:18:28 by ojessi            #+#    #+#             */
-/*   Updated: 2019/05/07 17:15:21 by ojessi           ###   ########.fr       */
+/*   Created: 2019/05/07 14:04:09 by ojessi            #+#    #+#             */
+/*   Updated: 2019/05/07 14:04:44 by ojessi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-#define COUNT_ARG 18 
+#include "libft.h"
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <stdarg.h>
-# include <string.h>
-# include <unistd.h>
-# include "libft.h"
+char	*ft_strnew(size_t size)
+{
+	char	*ptr;
 
-int				ft_printf(const char *format, ...);
-void			ft_checkarg(va_list ap, char *str);
-
-
-#endif
+	ptr = NULL;
+	ptr = (char*)malloc(sizeof(char) * (size + 1));
+	if (ptr)
+		return ((char*)ft_memset(ptr, '\0', size + 1));
+	else
+		return (NULL);
+}

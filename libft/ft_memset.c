@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ojessi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/06 20:20:50 by ojessi            #+#    #+#             */
-/*   Updated: 2019/05/06 20:21:46 by ojessi           ###   ########.fr       */
+/*   Created: 2019/05/07 14:04:51 by ojessi            #+#    #+#             */
+/*   Updated: 2019/05/07 14:05:36 by ojessi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int		main(void)
+void	*ft_memset(void *memptr, int value, size_t num)
 {
-	ft_printf("kek");
-	return (0);
+	unsigned char *str;
+
+
+	str = memptr;
+	while (num-- > 0)
+		*str++ = value;
+	return (memptr);
 }

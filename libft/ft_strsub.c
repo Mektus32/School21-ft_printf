@@ -1,28 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ojessi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/06 20:18:28 by ojessi            #+#    #+#             */
-/*   Updated: 2019/05/07 17:15:21 by ojessi           ###   ########.fr       */
+/*   Created: 2019/05/07 15:15:12 by ojessi            #+#    #+#             */
+/*   Updated: 2019/05/07 15:28:01 by ojessi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-#define COUNT_ARG 18 
+#include "libft.h"
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <stdarg.h>
-# include <string.h>
-# include <unistd.h>
-# include "libft.h"
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
+{
+	char	*str;
+	size_t	i;
+	int		j;
 
-int				ft_printf(const char *format, ...);
-void			ft_checkarg(va_list ap, char *str);
-
-
-#endif
+	if (!s)
+		return (NULL);
+	str = NULL;
+	j = 0;
+	i = 0;
+	str = (char*)malloc(sizeof(char) * (len + 1));
+	if (str)
+	{
+		while (s[i] != '\0')
+		{
+			if (i >= start && i < len + start)
+			{
+				str[j] = s[i];
+				j++;
+			}
+			i++;
+		}
+		str[j] = '\0';
+	}
+	return (str);
+}

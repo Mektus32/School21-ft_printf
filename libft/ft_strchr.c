@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ojessi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/06 20:18:28 by ojessi            #+#    #+#             */
-/*   Updated: 2019/05/07 17:15:21 by ojessi           ###   ########.fr       */
+/*   Created: 2019/05/07 15:14:30 by ojessi            #+#    #+#             */
+/*   Updated: 2019/05/07 16:03:12 by ojessi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-#define COUNT_ARG 18 
+#include "libft.h"
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <stdarg.h>
-# include <string.h>
-# include <unistd.h>
-# include "libft.h"
+char	*ft_strchr(const char *str, int ch)
+{
+	int i;
 
-int				ft_printf(const char *format, ...);
-void			ft_checkarg(va_list ap, char *str);
-
-
-#endif
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == ch)
+			return ((char*)&str[i]);
+		i++;
+	}
+	if (ch == '\0')
+		return ((char*)&str[i]);
+	return (NULL);
+}
