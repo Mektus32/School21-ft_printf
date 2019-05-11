@@ -12,7 +12,7 @@
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-#define COUNT_ARG 18 
+# define COUNT_ARG 16
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -21,8 +21,31 @@
 # include <unistd.h>
 # include "libft.h"
 
+typedef enum 	e_bool
+{
+ 	FALSE,
+	TRUE
+}				t_bool;
+
+typedef	struct	s_print
+{
+	t_bool	f_minus;
+	t_bool	f_plus;
+	t_bool	f_space;
+	t_bool	f_grid;//решетка
+	t_bool	f_zero;
+	t_bool	f_quote;//кавычка
+	int		w_nbr;
+	t_bool	w_star;
+	t_bool	a_dot;
+	int		a_nbr;
+	t_bool	a_nbr_bool;
+	t_bool	a_star;
+	t_bool	s_type;
+}				t_print;
+
 int				ft_printf(const char *format, ...);
 void			ft_checkarg(va_list ap, char *str);
-
+int				ft_print_s(char *str, char *new);
 
 #endif

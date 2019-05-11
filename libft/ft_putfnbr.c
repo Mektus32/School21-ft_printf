@@ -34,8 +34,8 @@ void	ft_putfnbr(float fnbr, size_t quantity)
 	}
 	else
 	{
-		rest = ((fnbr - ft_truncf(fnbr))) * ft_pow(10, quantity);
-		printf("fnbr = %f - trunc %f = %f\n", fnbr, ft_truncf(fnbr), rest);
+		rest = ((fnbr - ft_truncf(fnbr)));//* ft_pow(10, quantity);
+		printf("fnbr - trunc = %f - %f = rest = %f\n", fnbr, ft_truncf(fnbr), rest);
 		ft_putnbr((int)ft_truncf(rest));
 	}
 }

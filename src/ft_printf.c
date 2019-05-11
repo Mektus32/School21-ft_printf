@@ -15,25 +15,22 @@
 static	void	ft_fill_array(char *array)
 {
 
-	array[0] = 'd';
-	array[1] = 'i';
-	array[2] = 'o';
-	array[3] = 'u';
-	array[4] = 'x';
-	array[5] = 'X';
-	array[6] = 'e';
-	array[7] = 'E';
-	array[8] = 'f';
-	array[9] = 'F';
-	array[10] = 'g';
-	array[11] = 'G';
-	array[12] = 'a';
-	array[13] = 'A';
-	array[14] = 'c';
-	array[15] = 's';
-	array[16] = 'p';
-	array[17] = 'n';
-	array[18] = '%';
+	array[0] = 'c';//c
+	array[1] = 's';//s
+	array[2] = 'p';//p
+	array[3] = 'd';//d
+	array[4] = 'i';//i
+	array[5] = 'o';//o
+	array[6] = 'u';//u
+	array[7] = 'x';//x
+	array[8] = 'X';//X
+	array[9] = 'f';//f
+	array[10] = 'e';//e
+	array[11] = 'g';//g
+	array[12] = 'b';//b
+	array[13] = 'r';//r
+	array[14] = 'k';//k
+	array[15] = '%';
 }
 
 static	char	*ft_params_arg(const char **format)
@@ -73,7 +70,8 @@ int		ft_printf(const char *format, ...)
 	{
 		if (ft_strncmp(format, "%", 1) == 0)
 		{
-			str = ft_params_arg(&format);
+			if ((str = ft_params_arg(&format)) == NULL)
+				exit(0);
 			ft_checkarg(ap, str);
 			free(str);
 		}
@@ -81,13 +79,21 @@ int		ft_printf(const char *format, ...)
 			ft_putchar(*format);
 		format++;
 	}
+	va_end(ap);
 	return (0);
 }
 
 int		main(void)
 {
-	//float a = -0.1012313;//6
+	//float		a = -0.1012313;//6
+    //int		a = 10;
+    //int		*p = &a;
 	
-	ft_printf("%.10d kek %2.9s grgerg %f", 200, "lol", 10.19);
+	//ft_printf("%.10d kek %2.9s grgerg %f", 200, "lol", 10.19);
+	ft_printf("%#-+0'20.20s", "kekekek");
+	//printf("%20.10d", -01000);
+    // printf("p = %p, x = %x, d = %d", p, p, p);
+	//printf("%1$d:%2$.*3$d:%4$.*3$d\n", 1, 2, 3, 4);//1:002:004
+	//printf("%.d",2);
 	return (0);
 }

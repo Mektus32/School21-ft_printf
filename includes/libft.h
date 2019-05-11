@@ -16,6 +16,7 @@
 # include "string.h"
 # include <unistd.h>
 # include <stdlib.h>
+# include "ft_printf.h"
 
 int		ft_strncmp(const char *str1, const char *str2, size_t n);
 void	ft_putchar(char c);
@@ -30,5 +31,6 @@ char	*ft_strnew(size_t size);
 void	ft_putfnbr(float fnbr, size_t quantity);
 char	*ft_strsub(char const *s, unsigned int start, size_t len);
 char	*ft_strchr(const char *str, int ch);
+int     ft_atoi(const char *str);
 
 #endif

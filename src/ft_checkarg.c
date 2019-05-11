@@ -14,16 +14,16 @@
 
 void	ft_checkarg(va_list ap, char *str)
 {
-	while (*str)
-	{
-		if (*str == 's')
-			ft_putstr(va_arg(ap, char *));
-		else if (*str == 'd')
+	int		i;
+
+	i = -1;
+	while (str[++i] != '\0')
+		if (str[i] == 's')
+			ft_print_s(va_arg(ap, char *), str);
+		else if (str[i] == 'd')
 			ft_putnbr(va_arg(ap, int));
-		else if (*str == 'c')
+		else if (str[i] == 'c')
 			ft_putchar((char)va_arg(ap, int));
-		else if (*str == 'f')
+		else if (str[i] == 'f')
 			ft_putfnbr(va_arg(ap, double), 6);
-		str++;
-	}
 }
