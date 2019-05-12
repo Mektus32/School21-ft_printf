@@ -32,5 +32,14 @@ void	ft_putfnbr(float fnbr, size_t quantity);
 char	*ft_strsub(char const *s, unsigned int start, size_t len);
 char	*ft_strchr(const char *str, int ch);
 int     ft_atoi(const char *str);
+int     ft_nbrlen(int nbr);
+size_t  ft_strlen(const char *str);
+char    *ft_itoa(int nbr);
+char	*ft_strdup(const char *str);
+char    *ft_free_join(char *new, char *src);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_free_join_rev(char *src, char *new);
+char	*ft_free_strsub(char const *s, unsigned int start, size_t len);
+char	*ft_free_strjoin_duo(char const *s1, char const *s2);
 
 #endif

@@ -42,10 +42,12 @@ typedef	struct	s_print
 	t_bool	a_nbr_bool;
 	t_bool	a_star;
 	t_bool	s_type;
+	char	s_str[2];
 }				t_print;
 
 int				ft_printf(const char *format, ...);
 void			ft_checkarg(va_list ap, char *str);
 int				ft_print_s(char *str, char *new);
+int				ft_print_di(int nbr, char *new);
 
 #endif

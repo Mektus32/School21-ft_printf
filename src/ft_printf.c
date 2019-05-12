@@ -90,8 +90,9 @@ int		main(void)
     //int		*p = &a;
 	
 	//ft_printf("%.10d kek %2.9s grgerg %f", 200, "lol", 10.19);
-	ft_printf("%#-+0'20.20s", "kekekek");
-	//printf("%20.10d", -01000);
+	ft_printf("%-+13.4d§\n", 100);
+	//ft_printf("%d\n", ft_nbrlen(-100));
+	printf("%-+13.4d§\n", 100);
     // printf("p = %p, x = %x, d = %d", p, p, p);
 	//printf("%1$d:%2$.*3$d:%4$.*3$d\n", 1, 2, 3, 4);//1:002:004
 	//printf("%.d",2);

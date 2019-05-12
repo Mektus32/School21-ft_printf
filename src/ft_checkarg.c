@@ -20,8 +20,8 @@ void	ft_checkarg(va_list ap, char *str)
 	while (str[++i] != '\0')
 		if (str[i] == 's')
 			ft_print_s(va_arg(ap, char *), str);
-		else if (str[i] == 'd')
-			ft_putnbr(va_arg(ap, int));
+		else if (str[i] == 'd' || str[i] == 'i')
+			ft_print_di(va_arg(ap, int), str);
 		else if (str[i] == 'c')
 			ft_putchar((char)va_arg(ap, int));
 		else if (str[i] == 'f')
