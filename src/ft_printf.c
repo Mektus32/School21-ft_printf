@@ -84,15 +84,15 @@ int		ft_printf(const char *format, ...)
 }
 
 int		main(void)
-{
+{	
 	//float		a = -0.1012313;//6
-    //int		a = 10;
-    //int		*p = &a;
+    // int		a = 10;
+    // int		*p = &a;
 	
 	//ft_printf("%.10d kek %2.9s grgerg %f", 200, "lol", 10.19);
-	ft_printf("%-+13.4d§\n", 100);
+	ft_printf("%-1.10hhd§\n", -2147483648);
 	//ft_printf("%d\n", ft_nbrlen(-100));
-	printf("%-+13.4d§\n", 100);
+	printf("%-1.10hhd§\n", (char)-100);
     // printf("p = %p, x = %x, d = %d", p, p, p);
 	//printf("%1$d:%2$.*3$d:%4$.*3$d\n", 1, 2, 3, 4);//1:002:004
 	//printf("%.d",2);

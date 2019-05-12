@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static void		itoa_isnegative(int *n, int *negative)
+static void		itoa_isnegative(long long int *n, int *negative)
 {
 	if (*n < 0)
 	{
@@ -21,15 +21,15 @@ static void		itoa_isnegative(int *n, int *negative)
 	}
 }
 
-char			*ft_itoa(int n)
+char			*ft_itoa(long long int n)
 {
-	int			tmpn;
-	int			len;
-	int			negative;
-	char		*str;
+	long long int	tmpn;
+	long long int	len;
+	int				negative;
+	char			*str;
 
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
+	if (n == -9223372036854775807)
+		return (ft_strdup("-9223372036854775807"));
 	tmpn = n;
 	len = 2;
 	negative = 0;

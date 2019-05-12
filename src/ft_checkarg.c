@@ -21,9 +21,9 @@ void	ft_checkarg(va_list ap, char *str)
 		if (str[i] == 's')
 			ft_print_s(va_arg(ap, char *), str);
 		else if (str[i] == 'd' || str[i] == 'i')
-			ft_print_di(va_arg(ap, int), str);
+			ft_print_di(va_arg(ap, long long int), str);
 		else if (str[i] == 'c')
-			ft_putchar((char)va_arg(ap, int));
+			ft_putchar(va_arg(ap, int));
 		else if (str[i] == 'f')
 			ft_putfnbr(va_arg(ap, double), 6);
 }
