@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ojessi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ojessi <ojessi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 20:22:31 by ojessi            #+#    #+#             */
-/*   Updated: 2019/05/07 17:15:18 by ojessi           ###   ########.fr       */
+/*   Updated: 2019/05/13 22:06:29 by ojessi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,17 @@ int		ft_printf(const char *format, ...)
 {
 	va_list	ap;
 	char	*str;
+	int		len;
 
 	va_start(ap, format);
+	len = 0;
 	while (*format)
 	{
 		if (ft_strncmp(format, "%", 1) == 0)
 		{
 			if ((str = ft_params_arg(&format)) == NULL)
 				exit(0);
-			ft_checkarg(ap, str);
+			len += ft_checkarg(ap, str);
 			free(str);
 		}
 		else
@@ -80,24 +82,28 @@ int		ft_printf(const char *format, ...)
 		format++;
 	}
 	va_end(ap);
-	return (0);
+	return (len);
 }
 
-int		main(void)
-{	
-	//float		a = -0.1012313;//6
-    // int		a = 10;
-    // int		*p = &a;
+// int		main(void)
+// {	
+// 	//float		a = -0.1012313;//6
+//     // int		a = 10;
+//     // int		*p = &a;
 	
-	//ft_printf("%.10d kek %2.9s grgerg %f", 200, "lol", 10.19);
-	//ft_printf("%5c§\n", 100);
-	//ft_printf("%d\n", ft_nbrlen(-100));
-	//printf("%5.c§\n", (char)100);
-    // printf("p = %p, x = %x, d = %d", p, p, p);
-	//printf("%1$d:%2$.*3$d:%4$.*3$d\n", 1, 2, 3, 4);//1:002:004
-	//printf("%.d",2);
-	//printf("%x", 79);//ft_itoa_base(15, 16, 10));
-	printf("%s\n", ft_itoa_base(-79, 16, 0));
-	//ft_atoa_binary_base("101", 10);
-	return (0);
-}
+// 	//ft_printf("%.10d kek %2.9s grgerg %f", 200, "lol", 10.19);
+// 	//ft_printf("%5c§\n", 100);
+// 	//ft_printf("%d\n", ft_nbrlen(-100));
+// 	//printf("%5.c§\n", (char)100);
+//     // printf("p = %p, x = %x, d = %d", p, p, p);
+// 	//printf("%1$d:%2$.*3$d:%4$.*3$d\n", 1, 2, 3, 4);//1:002:004
+// 	//printf("%.d",2);
+// 	//printf("%x", 79);//ft_itoa_base(15, 16, 10));
+	
+// 	//printf("%x\n|", 10);
+// 	//printf("%s\n", ft_itoa_base(10, 16, 0));
+// 	ft_printf("% 10.5d", 4242);
+// 	ft_putchar('\n');
+// 	printf("% 10.5d", 4242);
+// 	return (0);
+// }

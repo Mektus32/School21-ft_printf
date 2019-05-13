@@ -89,26 +89,36 @@ int     ft_print_di(long long int nbr, char *new)
 	{
 		if (t.s_str[0] == 'h' && t.s_str[1] != 'h')
 		{
-			if (nbr < -32768ll || nbr > 32767ll)
+			if (nbr < -32768ll)
 				exit(0);//error
+			if (nbr > 32767ll)
+				nbr = -32769ll + nbr - 32767ll;
 			nbr = (short)nbr;
 		}
 		if (t.s_str[0] == 'h' && t.s_str[1] == 'h')
 		{
-			if (nbr < -128ll || nbr > 127ll)
+			if (nbr < -128ll)
 				exit(0);//error
+			if (nbr > 127ll)
+				nbr = -129ll + nbr - 127ll;
 			nbr = (char)nbr;
 		}
 		if (t.s_str[0] == 'l' && t.s_str[1] != 'l')
 		{
-			if (nbr < -2147483648ll || nbr > 2147483647ll)
+			if (nbr < -2147483649ll)
 				exit(0);//error
+			if (nbr > 2147483648ll)
+				nbr = -2147483650ll + nbr - 2147483648ll;
 			nbr = (long int)nbr;
 		}
 		if (t.s_str[0] == 'l' && t.s_str[1] == 'l')
-			if (nbr < -9223372036854775807ll || nbr > 9223372036854775807ll)
+			if (nbr < -9223372036854775807ll - 1)
 				exit(0);//error
+			if (nbr > 9223372036854775807ll)
+				nbr = -9223372036854775807ll + nbr - 9223372036854775807ll;
 	}
+	else
+		nbr = (int)nbr;
 	if (nbr < 0ll)
 	{
 		negativ = TRUE;
@@ -119,32 +129,34 @@ int     ft_print_di(long long int nbr, char *new)
 	tmp = ft_itoa(nbr);
 	if (negativ == TRUE)
 	{
-		t.w_nbr--;
 		t.a_nbr--;
+		if (t.f_zero == TRUE && t.f_plus == FALSE)
+			t.w_nbr--;
 	}
     if (t.f_space == TRUE && nbr >= 0ll)
     	tmp = ft_free_join_rev(" ", tmp);
 	if (t.f_zero == TRUE && t.w_nbr > (int)ft_strlen(tmp))
-		tmp = ft_free_strjoin_duo(tmp, ft_memset(ft_strnew(t.w_nbr - ft_strlen(tmp)), ' ', t.w_nbr - ft_strlen(tmp)));
+		tmp = ft_free_strjoin_duo(ft_memset(ft_strnew(t.w_nbr - ft_strlen(tmp)), '0', t.w_nbr - ft_strlen(tmp)), tmp);
 	if (t.a_dot == TRUE && t.a_nbr > (int)ft_strlen(tmp))
 		tmp = ft_free_strjoin_duo(ft_memset(ft_strnew(t.a_nbr - ft_strlen(tmp)), '0', t.a_nbr - ft_strlen(tmp)), tmp);
 	if (t.f_minus == TRUE && t.w_nbr > (int)ft_strlen(tmp))
 		tmp = ft_free_strjoin_duo(tmp, ft_memset(ft_strnew(t.w_nbr - ft_strlen(tmp)), ' ', t.w_nbr - ft_strlen(tmp)));
-	if (t.f_plus == TRUE && nbr >= 0ll)
+	if (t.f_plus == TRUE && nbr >= 0ll && negativ == FALSE)
     	tmp = ft_free_join_rev("+", tmp);
+	if (negativ == TRUE && t.w_nbr <= (int)ft_strlen(tmp))
+		ft_putchar('-');
     if (t.w_nbr > (int)ft_strlen(tmp) && t.f_minus == FALSE)
 	{
-		if (t.f_plus == TRUE)
-			t.w_nbr++;
+		if (negativ == TRUE)
+			tmp = ft_free_join_rev("-", tmp);
 		tmp = ft_free_strjoin_duo(ft_memset(ft_strnew(t.w_nbr - ft_strlen(tmp)), ' ', t.w_nbr - ft_strlen(tmp)), tmp); 
 	}
-	if (negativ == TRUE)
-		ft_putchar('-');
+	
 	ft_putstr(tmp);
-    free(tmp);
 	if (negativ == TRUE)
     	len = (int)ft_strlen(tmp) + 1;
 	else
 		len = (int)ft_strlen(tmp);
+    free(tmp);
 	return (len);
 }

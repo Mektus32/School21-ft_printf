@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ojessi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ojessi <ojessi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 20:18:28 by ojessi            #+#    #+#             */
-/*   Updated: 2019/05/07 17:15:21 by ojessi           ###   ########.fr       */
+/*   Updated: 2019/05/13 22:02:54 by ojessi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef	struct	s_print
 }				t_print;
 
 int				ft_printf(const char *format, ...);
-void			ft_checkarg(va_list ap, char *str);
+int				ft_checkarg(va_list ap, char *str);
 int				ft_print_s(char *str, char *new);
 int				ft_print_di(long long int nbr, char *new);
 int				ft_print_c(char c, char *new);

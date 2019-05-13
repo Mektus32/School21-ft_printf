@@ -3,12 +3,18 @@
 int     ft_print_s(char *str, char *new)
 {
     int     i;
-	int		j;
+	char	*tmp;
+	int		len;
     t_print t = {0,0,0,0,0,0,0,0,0,0,0,0,0,"00"};
     
     i = -1;
     t.w_nbr = -1;
     t.a_nbr = 0;
+	if (str == NULL)
+	{
+		ft_putstr("(null)");
+		return (6);
+	}
     while(new[++i] != '\0')
     {
         if (new[i] == '-' || new[i] == '+' || new[i] == ' ' ||
@@ -75,16 +81,18 @@ int     ft_print_s(char *str, char *new)
 			i += 2;
 		}
     }
+	tmp = ft_strdup(str);
 	if (t.f_grid == TRUE || t.f_plus == TRUE || t.f_quote == TRUE
-		||t.f_zero == TRUE || t.f_space == TRUE || t.s_type == TRUE)
+		|| t.f_zero == TRUE || t.f_space == TRUE || t.s_type == TRUE)
 		exit(0);//error
-	if (t.f_minus == TRUE)
-	{
-		j = -1;
-		ft_putstr(str);
-		while (++j < t.w_nbr - (int)ft_strlen(str))
-				ft_putchar(' ');
-	}
-	//printf("f_minus = %d\nf_plus = %d\nf_space = %d\nf_grid = %d\nf_zero = %d\nf_quote = %d\nw_nbr = %d\nw_star = %d\na_dot = %d\na_nbr = %d\na_star = %d\ns_typed = %d\nt_nbr_bool = %d\ns_str = %s\n", t.f_minus, t.f_plus, t.f_space, t.f_grid, t.f_zero, t.f_quote, t.w_nbr, t.w_star, t.a_dot, t.a_nbr, t.a_star, t.s_type, t.a_nbr_bool, t.s_str);
-    return (0);
+	if (t.a_dot == TRUE && t.a_nbr < (int)ft_strlen(tmp))
+		tmp = ft_free_strncpy(ft_strnew(t.a_nbr), tmp, t.a_nbr);
+	if (t.f_minus == TRUE && t.w_nbr > (int)ft_strlen(tmp))
+		tmp = ft_free_strjoin_duo(tmp, ft_memset(ft_strnew(t.w_nbr - ft_strlen(tmp)), ' ', t.w_nbr - ft_strlen(tmp)));
+	if (t.w_nbr > (int)ft_strlen(tmp) && t.f_minus == FALSE)
+		tmp = ft_free_strjoin_duo(ft_memset(ft_strnew(t.w_nbr - ft_strlen(tmp)), ' ', t.w_nbr - ft_strlen(tmp)), tmp);
+	ft_putstr(tmp);
+	len = (int)ft_strlen(tmp);
+	free(tmp);
+	return (len);
 }
