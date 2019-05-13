@@ -90,11 +90,14 @@ int		main(void)
     // int		*p = &a;
 	
 	//ft_printf("%.10d kek %2.9s grgerg %f", 200, "lol", 10.19);
-	ft_printf("%-1.10hhd§\n", -2147483648);
+	//ft_printf("%5c§\n", 100);
 	//ft_printf("%d\n", ft_nbrlen(-100));
-	printf("%-1.10hhd§\n", (char)-100);
+	//printf("%5.c§\n", (char)100);
     // printf("p = %p, x = %x, d = %d", p, p, p);
 	//printf("%1$d:%2$.*3$d:%4$.*3$d\n", 1, 2, 3, 4);//1:002:004
 	//printf("%.d",2);
+	//printf("%x", 79);//ft_itoa_base(15, 16, 10));
+	printf("%s\n", ft_itoa_base(-79, 16, 0));
+	//ft_atoa_binary_base("101", 10);
 	return (0);
 }

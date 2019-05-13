@@ -23,7 +23,7 @@ void	ft_checkarg(va_list ap, char *str)
 		else if (str[i] == 'd' || str[i] == 'i')
 			ft_print_di(va_arg(ap, long long int), str);
 		else if (str[i] == 'c')
-			ft_putchar(va_arg(ap, int));
+			ft_print_c((char)va_arg(ap, int), str);
 		else if (str[i] == 'f')
 			ft_putfnbr(va_arg(ap, double), 6);
 }

@@ -1,11 +1,10 @@
 #include "ft_printf.h"
 
-int     ft_print_di(long long int nbr, char *new)
+int		ft_print_c(char	c, char *new)
 {
-    int     i;
+	int     i;
     char    *tmp;
 	int		len;
-	t_bool	negativ;
     t_print t = {0,0,0,0,0,0,0,0,0,0,0,0,0,"00"};
     
     i = -1;
@@ -75,76 +74,14 @@ int     ft_print_di(long long int nbr, char *new)
 			i += 2;
 		}
     }
-	if (t.f_grid == TRUE || t.s_str[0] == 'L')
-        exit(0);//error
-    if (t.f_plus == TRUE)
-	{
-        t.f_space = FALSE;
-		t.w_nbr--;
-	}
-    if (t.f_minus == TRUE)
-        t.f_zero = FALSE;
-	negativ = FALSE;
-	if (t.s_type == TRUE)
-	{
-		if (t.s_str[0] == 'h' && t.s_str[1] != 'h')
-		{
-			if (nbr < -32768ll || nbr > 32767ll)
-				exit(0);//error
-			nbr = (short)nbr;
-		}
-		if (t.s_str[0] == 'h' && t.s_str[1] == 'h')
-		{
-			if (nbr < -128ll || nbr > 127ll)
-				exit(0);//error
-			nbr = (char)nbr;
-		}
-		if (t.s_str[0] == 'l' && t.s_str[1] != 'l')
-		{
-			if (nbr < -2147483648ll || nbr > 2147483647ll)
-				exit(0);//error
-			nbr = (long int)nbr;
-		}
-		if (t.s_str[0] == 'l' && t.s_str[1] == 'l')
-			if (nbr < -9223372036854775807ll || nbr > 9223372036854775807ll)
-				exit(0);//error
-	}
-	if (nbr < 0ll)
-	{
-		negativ = TRUE;
-		t.a_nbr == 0 ? t.a_nbr : t.a_nbr++;
-		nbr *= -1;
-		
-	}
-	tmp = ft_itoa(nbr);
-	if (negativ == TRUE)
-	{
-		t.w_nbr--;
-		t.a_nbr--;
-	}
-    if (t.f_space == TRUE && nbr >= 0ll)
-    	tmp = ft_free_join_rev(" ", tmp);
-	if (t.f_zero == TRUE && t.w_nbr > (int)ft_strlen(tmp))
-		tmp = ft_free_strjoin_duo(tmp, ft_memset(ft_strnew(t.w_nbr - ft_strlen(tmp)), ' ', t.w_nbr - ft_strlen(tmp)));
-	if (t.a_dot == TRUE && t.a_nbr > (int)ft_strlen(tmp))
-		tmp = ft_free_strjoin_duo(ft_memset(ft_strnew(t.a_nbr - ft_strlen(tmp)), '0', t.a_nbr - ft_strlen(tmp)), tmp);
+	tmp = ft_memset(ft_strnew(1), c, 1);
+	if (t.a_dot == TRUE || t.f_quote == TRUE || t.f_zero == TRUE
+	|| t.f_plus == TRUE || t.f_grid == TRUE || t.s_type == TRUE)
+		exit(0);//error
 	if (t.f_minus == TRUE && t.w_nbr > (int)ft_strlen(tmp))
 		tmp = ft_free_strjoin_duo(tmp, ft_memset(ft_strnew(t.w_nbr - ft_strlen(tmp)), ' ', t.w_nbr - ft_strlen(tmp)));
-	if (t.f_plus == TRUE && nbr >= 0ll)
-    	tmp = ft_free_join_rev("+", tmp);
-    if (t.w_nbr > (int)ft_strlen(tmp) && t.f_minus == FALSE)
-	{
-		if (t.f_plus == TRUE)
-			t.w_nbr++;
-		tmp = ft_free_strjoin_duo(ft_memset(ft_strnew(t.w_nbr - ft_strlen(tmp)), ' ', t.w_nbr - ft_strlen(tmp)), tmp); 
-	}
-	if (negativ == TRUE)
-		ft_putchar('-');
 	ft_putstr(tmp);
-    free(tmp);
-	if (negativ == TRUE)
-    	len = (int)ft_strlen(tmp) + 1;
-	else
-		len = (int)ft_strlen(tmp);
+	len = (int)ft_strlen(tmp);
+	free(tmp);
 	return (len);
 }

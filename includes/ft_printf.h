@@ -49,5 +49,6 @@ int				ft_printf(const char *format, ...);
 void			ft_checkarg(va_list ap, char *str);
 int				ft_print_s(char *str, char *new);
 int				ft_print_di(long long int nbr, char *new);
+int				ft_print_c(char c, char *new);
 
 #endif

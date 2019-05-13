@@ -41,5 +41,8 @@ char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_free_join_rev(char *src, char *new);
 char	*ft_free_strsub(char const *s, unsigned int start, size_t len);
 char	*ft_free_strjoin_duo(char const *s1, char const *s2);
+char    *ft_itoa_base(int nbr, int base, int uppercase);
+char    *ft_strrev(char *s);
+char	*ft_atoa_binary_base(char *str, int base, int uppercase);
 
 #endif
