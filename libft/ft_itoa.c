@@ -6,7 +6,7 @@
 /*   By: ojessi <ojessi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 15:15:50 by ojessi            #+#    #+#             */
-/*   Updated: 2019/05/13 20:18:41 by ojessi           ###   ########.fr       */
+/*   Updated: 2019/05/14 15:13:29 by ojessi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ char			*ft_itoa(long long int n)
 	int				negative;
 	char			*str;
 
-	if (n == -9223372036854775807)
-		return (ft_strdup("-9223372036854775807"));
+	if (n == -9223372036854775807 - 1)
+		return (ft_strdup("-9223372036854775808"));
 	tmpn = n;
 	len = 2;
 	negative = 0;

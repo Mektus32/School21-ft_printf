@@ -29,7 +29,7 @@ static	char	*ft_strmirror(char *str)
 
 	i = -1;
 	flag = 1;
-	tmp = ft_free_join_rev("0", str);
+	tmp = ft_free_strjoin_duo(ft_memset(ft_strnew(8 - ft_strlen(str)), '0', 8 - ft_strlen(str)), str);
 	while (tmp[++i] != '\0')
 		if (tmp[i] == '0')
 			tmp[i] = '1';
@@ -59,7 +59,7 @@ static	char	*ft_negative(int nbr, int base, int uppercase)
 	res = 1;
 	while (res <= nbr)
 	{
-		res *= 2;
+		res <<= 1;
 		i++;
 	}
 	j = i;
@@ -73,7 +73,6 @@ static	char	*ft_negative(int nbr, int base, int uppercase)
 	tmp = ft_strrev(tmp);
 	tmp = ft_strmirror(tmp);
 	return (ft_atoa_binary_base(tmp, base, uppercase));
-
 }
 
 char    *ft_itoa_base(int nbr, int base, int uppercase)

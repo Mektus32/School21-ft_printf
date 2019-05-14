@@ -6,7 +6,7 @@
 /*   By: ojessi <ojessi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 21:04:42 by ojessi            #+#    #+#             */
-/*   Updated: 2019/05/13 22:03:08 by ojessi           ###   ########.fr       */
+/*   Updated: 2019/05/14 17:00:08 by ojessi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,11 @@ int		ft_checkarg(va_list ap, char *str)
 			return (ft_print_c((char)va_arg(ap, int), str));
 		else if (str[i] == 'f')
 			ft_putfnbr(va_arg(ap, double), 6);
+		else if (str[i] == 'x')
+			return (ft_print_Xox(va_arg(ap, int), str, 16, 0));
+		else if (str[i] == 'X')
+			return (ft_print_Xox(va_arg(ap, int), str, 16, 1));
+		else if (str[i] == 'o')
+			return (ft_print_Xox(va_arg(ap, int), str, 8, 0));
 		return (0);
 }

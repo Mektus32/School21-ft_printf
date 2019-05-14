@@ -1,15 +1,17 @@
 #include "ft_printf.h"
 
-int     ft_print_di(long long int nbr, char *new)
+int     ft_print_Xox(int nbr, char *new, int base, int uppercase)
 {
-    int     i;
-    char    *tmp;
+    int		i;
+    char	*tmp;
 	int		len;
-	t_bool	negativ;
+    int		size;
+	
     t_print t = {0,0,0,0,0,0,0,0,0,0,0,0,0,"00"};
     
     i = -1;
 	t.a_nbr = -1;
+    size = 8;
     while(new[++i] != '\0')
     {
         if (new[i] == '-' || new[i] == '+' || new[i] == ' ' ||
@@ -19,7 +21,7 @@ int     ft_print_di(long long int nbr, char *new)
 			t.s_type == FALSE)
         	{
             	if (new[i] == '-')
-                	t.f_minus = TRUE;
+                    t.f_minus = TRUE;
             	else if (new[i] == '+')
                 	t.f_plus = TRUE;
             	else if (new[i] == ' ')
@@ -77,55 +79,41 @@ int     ft_print_di(long long int nbr, char *new)
 			i += 2;
 		}
     }
-	if (t.f_grid == TRUE || t.s_str[0] == 'L')
-        exit(0);//error
-    t.f_plus == TRUE ? t.f_space = FALSE : 0;
-	t.w_nbr = (t.f_plus == TRUE && nbr >= 0ll && (t.f_minus == TRUE || t.f_zero == TRUE)) ? t.w_nbr - 1 : t.w_nbr;
-    if (t.f_minus == TRUE)
-        t.f_zero = FALSE;
-	negativ = FALSE;
-	if (t.s_type == TRUE)
+	if (t.f_plus == TRUE || t.f_space == TRUE || t.f_quote == TRUE)
+		exit(0);//error
+
+	if (nbr == 0)
 	{
-		if (t.s_str[0] == 'h' && t.s_str[1] != 'h')
-		{
-			nbr = (nbr < -32768ll) ? (32768ll << 1) - nbr : nbr;
-			nbr = (nbr > 32767ll) ? -32769ll + nbr - 32767ll : nbr;
-			nbr = (short)nbr;
-		}
-		if (t.s_str[0] == 'h' && t.s_str[1] == 'h')
-		{
-			nbr = (nbr < -128) ? (128ll << 1) - nbr : nbr;
-			nbr = (nbr > 127) ? -129ll + nbr - 127ll : nbr;
-			nbr = (char)nbr;
-		}
-		if (t.s_str[0] == 'l' || t.s_str[0] == 'j')
-			nbr = (nbr < -9223372036854775807ll - 1) ? 9223372036854775807ll + 2 + 9223372036854775807ll - nbr : nbr;
-			nbr = (nbr > 9223372036854775807ll) ? -9223372036854775807ll + -9223372036854775807ll - 2 + nbr : nbr;
+		ft_putchar('0');
+		return (1);
 	}
-	else
-		nbr = (int)nbr;
-	if (nbr == 0ll && t.a_dot == TRUE)
-		tmp = ft_strnew(1);
-	else
-		tmp = (nbr < 0ll && (t.f_zero == TRUE || t.a_dot == TRUE)) ? ft_itoa(-nbr) : ft_itoa(nbr);
-	t.w_nbr = (nbr < 0ll && t.f_zero == TRUE) ? t.w_nbr - 1: t.w_nbr;
-	(t.a_dot == TRUE && t.f_zero == TRUE) ? t.f_zero = FALSE : 0;
+
+	if (t.f_minus == TRUE)
+		t.f_zero = 0;
+	tmp = ft_itoa_base(nbr, base, uppercase);
+	
+	if (t.f_grid == TRUE)
+		t.w_nbr -= 2;
+
+	if (size > (int)ft_strlen(tmp) && base == 16 && nbr < 0)
+		tmp = ft_free_strjoin_duo(ft_memset(ft_strnew(size - ft_strlen(tmp)), (uppercase == 1) ? 'F' : 'f', size - ft_strlen(tmp)), tmp);
+    
 	if (t.a_dot == TRUE && t.a_nbr > (int)ft_strlen(tmp))
 		tmp = ft_free_strjoin_duo(ft_memset(ft_strnew(t.a_nbr - ft_strlen(tmp)), '0', t.a_nbr - ft_strlen(tmp)), tmp);
-	if (t.f_space == TRUE && nbr >= 0ll)
-    	tmp = ft_free_join_rev(" ", tmp);
+	
 	if (t.f_zero == TRUE && t.w_nbr > (int)ft_strlen(tmp))
 		tmp = ft_free_strjoin_duo(ft_memset(ft_strnew(t.w_nbr - ft_strlen(tmp)), '0', t.w_nbr - ft_strlen(tmp)), tmp);
+	
 	if (t.f_minus == TRUE && t.w_nbr > (int)ft_strlen(tmp))
 		tmp = ft_free_strjoin_duo(tmp, ft_memset(ft_strnew(t.w_nbr - ft_strlen(tmp)), ' ', t.w_nbr - ft_strlen(tmp)));
-	if (t.f_plus == TRUE && nbr >= 0ll)
-    	tmp = ft_free_join_rev("+", tmp);
+	
+	if (t.f_grid == TRUE && nbr != 0)
+		tmp = ft_free_strjoin_duo((uppercase == 1) ? ft_strdup("0X") : ft_strdup("0x"), tmp);
+
 	if (t.w_nbr > (int)ft_strlen(tmp))
 		tmp = ft_free_strjoin_duo(ft_memset(ft_strnew(t.w_nbr - ft_strlen(tmp)), ' ', t.w_nbr - ft_strlen(tmp)), tmp);
-	(nbr < 0ll && (t.f_zero == TRUE || t.a_dot == TRUE)) ? ft_putchar('-') : 0;
-	len = (nbr < 0ll && (t.f_zero == TRUE || t.a_dot == TRUE)) ? 1 : 0;
-	len += (int)ft_strlen(tmp);
 	ft_putstr(tmp);
-    free(tmp);
+	len = (int)ft_strlen(tmp);
+	free(tmp);
 	return (len);
 }

@@ -1,4 +1,5 @@
 #include "ft_printf.h"
+#define LEN ((c == 0) ? (int)ft_strlen(tmp) - 1 : (int)ft_strlen(tmp))
 
 int		ft_print_c(char	c, char *new)
 {
@@ -74,14 +75,19 @@ int		ft_print_c(char	c, char *new)
 			i += 2;
 		}
     }
-	tmp = ft_memset(ft_strnew(1), c, 1);
+	if (c == 0)
+		tmp = ft_strdup("^@");
+	else
+		tmp = ft_memset(ft_strnew(1), c, 1);
 	if (t.a_dot == TRUE || t.f_quote == TRUE || t.f_zero == TRUE
 	|| t.f_plus == TRUE || t.f_grid == TRUE || t.s_type == TRUE)
 		exit(0);//error
-	if (t.f_minus == TRUE && t.w_nbr > (int)ft_strlen(tmp))
-		tmp = ft_free_strjoin_duo(tmp, ft_memset(ft_strnew(t.w_nbr - ft_strlen(tmp)), ' ', t.w_nbr - ft_strlen(tmp)));
+	if (t.f_minus == TRUE && t.w_nbr > LEN)
+		tmp = ft_free_strjoin_duo(tmp, ft_memset(ft_strnew(t.w_nbr - LEN), ' ', t.w_nbr - LEN));
+	if (t.w_nbr > LEN)
+		tmp = ft_free_strjoin_duo(ft_memset(ft_strnew(t.w_nbr - LEN), ' ', t.w_nbr - LEN), tmp);
 	ft_putstr(tmp);
-	len = (int)ft_strlen(tmp);
+	len = LEN;
 	free(tmp);
 	return (len);
 }
