@@ -26,10 +26,19 @@ static	char	*ft_strmirror(char *str)
 	int		i;
 	int		flag;
 	char	*tmp;
+	int		size;
 
+	if (ft_strlen(str) < 8)
+		size = 8;
+	else if (ft_strlen(str) < 16)
+		size = 16;
+	else if (ft_strlen(str) < 32)
+		size = 32;
+	else
+		size = 64;
 	i = -1;
 	flag = 1;
-	tmp = ft_free_strjoin_duo(ft_memset(ft_strnew(8 - ft_strlen(str)), '0', 8 - ft_strlen(str)), str);
+	tmp = ft_free_strjoin_duo(ft_memset(ft_strnew(size - ft_strlen(str)), '0', size - ft_strlen(str)), str);
 	while (tmp[++i] != '\0')
 		if (tmp[i] == '0')
 			tmp[i] = '1';
@@ -47,17 +56,17 @@ static	char	*ft_strmirror(char *str)
 	return (tmp);
 }
 
-static	char	*ft_negative(int nbr, int base, int uppercase)
+static	char	*ft_negative(long long int nbr, int base, int uppercase)
 {
-	int		i;
-	char	*tmp;
-	int		res;
-	int		j;
+	int					i;
+	char				*tmp;
+	long long int		res;
+	int					j;
 
-	ft_abs(&nbr);
+	nbr *= -1;
 	i = 0;
 	res = 1;
-	while (res <= nbr)
+	while (res <= nbr && i < 63)
 	{
 		res <<= 1;
 		i++;
@@ -75,26 +84,36 @@ static	char	*ft_negative(int nbr, int base, int uppercase)
 	return (ft_atoa_binary_base(tmp, base, uppercase));
 }
 
-char    *ft_itoa_base(int nbr, int base, int uppercase)
+char    *ft_itoa_base(long long int nbr, int base, int uppercase)
 {
-	int		i;
-	int		res;
-	char	*tmp;
-	int		j;
+	int					i;
+	long long int		res;
+	char				*tmp;
+	int					j;
+	int					k;
 
+	k = 0;
 	if (base < 2 || base > 16)
 		return (NULL);
-	if (base == 10 && nbr == -2147483648)
-		return ("-2147483648");
+	if (base == 10 && nbr == -9223372036854775807ll - 1)
+		return (ft_strdup("-9223372036854775808"));
+	if (base == 16 && nbr == (-9223372036854775807ll - 1) && uppercase != 0)
+		return (ft_strdup("7FFFFFFFFFFFFFFF"));
+	if (base == 16 && nbr == (-9223372036854775807ll - 1) && uppercase == 0) 
+		return (ft_strdup("7fffffffffffffff"));
+	if (base == 8 && nbr == (-9223372036854775807ll - 1) && uppercase == 0) 
+		return (ft_strdup("777777777777777777777"));
 	if (nbr < 0)
 		return (ft_negative(nbr, base, uppercase));
 	i = 0;
 	res = 1;
-	while (res <= nbr)
+	while (res <= nbr && (res * base != 0) && i < 63)
 	{
 		res *= base;
 		i++;
 	}
+	if (res * base == 0)
+		i++;
 	j = i;
 	tmp = ft_strnew(i);
 	i = -1;
@@ -104,5 +123,14 @@ char    *ft_itoa_base(int nbr, int base, int uppercase)
 		nbr /= base;
 	}
 	ft_strrev(tmp);
+	i = -1;
+	while (tmp[++i] != '\0')
+		if (tmp[i] == '0')
+			k++;
+	if (k == (int)ft_strlen(tmp))
+		{
+			free(tmp);
+			tmp = ft_strdup("0");
+		}
 	return (tmp);
 }

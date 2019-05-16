@@ -6,7 +6,7 @@
 #    By: ojessi <ojessi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/06 20:39:18 by ojessi            #+#    #+#              #
-#    Updated: 2019/05/14 12:39:01 by ojessi           ###   ########.fr        #
+#    Updated: 2019/05/15 17:43:22 by ojessi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,6 @@ clean:
 fclean:
 	@/bin/rm -f *.o
 
-re: clean all
+re: clean fclean all
 
-.PHONY: re clean all
+.PHONY: re clean clean all

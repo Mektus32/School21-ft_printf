@@ -3,7 +3,7 @@
 char	*ft_atoa_binary_base(char *str, int base, int uppercase)
 {
 	int				i;
-	int				res;
+	long long int	res;
 	int				j;
 
 	if (base < 2 || base > 16)

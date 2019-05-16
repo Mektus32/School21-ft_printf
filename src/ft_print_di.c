@@ -87,20 +87,9 @@ int     ft_print_di(long long int nbr, char *new)
 	if (t.s_type == TRUE)
 	{
 		if (t.s_str[0] == 'h' && t.s_str[1] != 'h')
-		{
-			nbr = (nbr < -32768ll) ? (32768ll << 1) - nbr : nbr;
-			nbr = (nbr > 32767ll) ? -32769ll + nbr - 32767ll : nbr;
 			nbr = (short)nbr;
-		}
 		if (t.s_str[0] == 'h' && t.s_str[1] == 'h')
-		{
-			nbr = (nbr < -128) ? (128ll << 1) - nbr : nbr;
-			nbr = (nbr > 127) ? -129ll + nbr - 127ll : nbr;
 			nbr = (char)nbr;
-		}
-		if (t.s_str[0] == 'l' || t.s_str[0] == 'j')
-			nbr = (nbr < -9223372036854775807ll - 1) ? 9223372036854775807ll + 2 + 9223372036854775807ll - nbr : nbr;
-			nbr = (nbr > 9223372036854775807ll) ? -9223372036854775807ll + -9223372036854775807ll - 2 + nbr : nbr;
 	}
 	else
 		nbr = (int)nbr;
