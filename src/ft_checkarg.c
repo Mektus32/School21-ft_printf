@@ -6,7 +6,7 @@
 /*   By: ojessi <ojessi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 21:04:42 by ojessi            #+#    #+#             */
-/*   Updated: 2019/05/15 17:34:20 by ojessi           ###   ########.fr       */
+/*   Updated: 2019/05/17 17:35:12 by ojessi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,7 @@ int		ft_checkarg(va_list ap, char *str)
 			return (ft_print_Xox(va_arg(ap, long long int), str, 16, 1));
 		else if (str[i] == 'o')
 			return (ft_print_Xox(va_arg(ap, long long int), str, 8, 0));
+		else if (str[i] == '%')
+			return (ft_print_persent(str));
 		return (0);
 }

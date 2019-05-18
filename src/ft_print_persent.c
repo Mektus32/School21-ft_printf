@@ -1,16 +1,14 @@
 #include "ft_printf.h"
 
-int     ft_print_Xox(long long int nbr, char *new, int base, int uppercase)
+int     ft_print_persent(char *new)
 {
-    int		i;
-    char	*tmp;
+    int     i;
+	char	*tmp;
 	int		len;
-    int		size;
     t_print t = {0,0,0,0,0,0,0,0,0,0,0,0,0,"00"};
-	
+    
     i = -1;
 	t.a_nbr = -1;
-    size = 8;
     while(new[++i] != '\0')
     {
         if (new[i] == '-' || new[i] == '+' || new[i] == ' ' ||
@@ -20,7 +18,7 @@ int     ft_print_Xox(long long int nbr, char *new, int base, int uppercase)
 			t.s_type == FALSE)
         	{
             	if (new[i] == '-')
-                    t.f_minus = TRUE;
+                	t.f_minus = TRUE;
             	else if (new[i] == '+')
                 	t.f_plus = TRUE;
             	else if (new[i] == ' ')
@@ -34,7 +32,7 @@ int     ft_print_Xox(long long int nbr, char *new, int base, int uppercase)
             	continue;
         	}
 			else
-				exit(0);//error
+				return (-1);//error
 		}
         if (t.a_dot == FALSE && t.a_nbr == -1 && t.s_type == FALSE &&
 			((new[i] >= '1' && new[i] <= '9') || new[i] == '*'))
@@ -42,7 +40,7 @@ int     ft_print_Xox(long long int nbr, char *new, int base, int uppercase)
             if (new[i] >= '1' && new[i] <= '9')
                 i += ft_nbrlen((t.w_nbr = ft_atoi(&(new[i])))) - 1;
             else if (t.w_star == TRUE || (t.w_nbr != 0 && new[i] == '*'))
-				exit(0);//error
+				return (-1);//error
 			else if (new[i] == '*')
 				t.w_star = TRUE;
 			continue;
@@ -58,7 +56,7 @@ int     ft_print_Xox(long long int nbr, char *new, int base, int uppercase)
 				t.a_nbr_bool = TRUE;
 			}
 			else if (t.a_star == TRUE)
-				exit(0);//error
+				return (-1);//error
 			if (new[i] == '*')
 			{
 				if (t.a_star == FALSE && t.a_nbr == -1)
@@ -67,10 +65,10 @@ int     ft_print_Xox(long long int nbr, char *new, int base, int uppercase)
 					i++;
 				}
 				else
-					exit(0);//error
+					return (-1);//error
 			}
 		}
-		if (new[i] == 'l' || new[i] == 'j')
+		if (new[i] == 'h' || new[i] == 'l' || new[i] == 'L' || new[i] == 'j' || new[i] == 'z')
 		{
 			t.s_type = TRUE;
 			t.s_str[0] = new[i];
@@ -78,61 +76,17 @@ int     ft_print_Xox(long long int nbr, char *new, int base, int uppercase)
 			i += 2;
 		}
     }
-	if (t.f_plus == TRUE || t.f_space == TRUE || t.f_quote == TRUE)
-		exit(0);//error
-
+	tmp = ft_strdup("%");
 	if (t.f_minus == TRUE)
-		t.f_zero = 0;
-	if (t.s_type == TRUE)
-	{
-		if  (t.s_str[0] == 'j')
-			nbr = (unsigned long long int)nbr;
-	}
-	else
-		nbr = (int)nbr;
-
-	if (t.w_nbr == 0 && t.a_nbr_bool == TRUE && t.a_nbr == 0 && nbr == 0ll)
-		if (base != 8 || t.f_grid == FALSE)
-			return (0);
-	if (t.a_dot == TRUE && nbr == 0)
-	{
-		if ((base != 8 || t.f_grid == FALSE) && t.w_nbr == 0)
-			return (0);
-		else if (t.w_nbr != 0)
-			tmp = ft_strdup(" ");
-		else
-			tmp = ft_itoa_base(nbr, base, uppercase);
-	}
-	else
-		tmp = ft_itoa_base(nbr, base, uppercase);
-
-	if (t.f_grid == TRUE && (t.f_minus == TRUE || t.f_zero == TRUE) && base == 16)
-		t.w_nbr -= 2;
-
-	if (size > (int)ft_strlen(tmp) && base == 16 && nbr < 0)
-		tmp = ft_free_strjoin_duo(ft_memset(ft_strnew(size - ft_strlen(tmp)), (uppercase == 1) ? 'F' : 'f', size - ft_strlen(tmp)), tmp);
-
-	if (t.a_dot == TRUE && t.a_nbr > (int)ft_strlen(tmp))
-		tmp = ft_free_strjoin_duo(ft_memset(ft_strnew(t.a_nbr - ft_strlen(tmp)), '0', t.a_nbr - ft_strlen(tmp)), tmp);
-
-	if (t.f_zero == TRUE && t.w_nbr > (int)ft_strlen(tmp))
+		t.f_zero = FALSE;
+    if (t.f_zero == TRUE && t.w_nbr > (int)ft_strlen(tmp))
 		tmp = ft_free_strjoin_duo(ft_memset(ft_strnew(t.w_nbr - ft_strlen(tmp)), '0', t.w_nbr - ft_strlen(tmp)), tmp);
-
-	if (t.f_grid == TRUE && nbr != 0 && base == 8)
-		tmp = ft_free_strjoin_duo(ft_strdup("0"), tmp);
-
 	if (t.f_minus == TRUE && t.w_nbr > (int)ft_strlen(tmp))
 		tmp = ft_free_strjoin_duo(tmp, ft_memset(ft_strnew(t.w_nbr - ft_strlen(tmp)), ' ', t.w_nbr - ft_strlen(tmp)));
-
-	if (t.f_grid == TRUE && nbr != 0 && base == 16)
-		tmp = ft_free_strjoin_duo((uppercase == 1) ? ft_strdup("0X") : ft_strdup("0x"), tmp);
-
 	if (t.w_nbr > (int)ft_strlen(tmp))
 		tmp = ft_free_strjoin_duo(ft_memset(ft_strnew(t.w_nbr - ft_strlen(tmp)), ' ', t.w_nbr - ft_strlen(tmp)), tmp);
-
+    len = ft_strlen(tmp);
 	ft_putstr(tmp);
-
-	len = (int)ft_strlen(tmp);
 	free(tmp);
 	return (len);
 }

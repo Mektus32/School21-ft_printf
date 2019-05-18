@@ -6,7 +6,7 @@
 /*   By: ojessi <ojessi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 20:22:31 by ojessi            #+#    #+#             */
-/*   Updated: 2019/05/14 16:14:25 by ojessi           ###   ########.fr       */
+/*   Updated: 2019/05/17 17:55:37 by ojessi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ int		ft_printf(const char *format, ...)
 	va_list	ap;
 	char	*str;
 	int		len;
+	int		tmplen;
 
+	tmplen = 0;
 	va_start(ap, format);
 	len = 0;
 	while (*format)
@@ -74,7 +76,12 @@ int		ft_printf(const char *format, ...)
 		{
 			if ((str = ft_params_arg(&format)) == NULL)
 				exit(0);
-			len += ft_checkarg(ap, str);
+			if ((tmplen = ft_checkarg(ap, str)) < 0)
+				{
+					free(str);
+					exit(0);
+				}
+			len += tmplen;
 			free(str);
 		}
 		else

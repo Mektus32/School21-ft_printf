@@ -6,7 +6,7 @@
 /*   By: ojessi <ojessi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 20:18:28 by ojessi            #+#    #+#             */
-/*   Updated: 2019/05/15 17:34:27 by ojessi           ###   ########.fr       */
+/*   Updated: 2019/05/17 17:35:49 by ojessi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ int				ft_print_s(char *str, char *new);
 int				ft_print_di(long long int nbr, char *new);
 int				ft_print_c(char c, char *new);
 int				ft_print_Xox(long long int nbr, char *new, int base, int uppercase);
+int				ft_print_persent(char *new);
 
 #endif
