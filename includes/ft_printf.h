@@ -6,13 +6,13 @@
 /*   By: ojessi <ojessi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 20:18:28 by ojessi            #+#    #+#             */
-/*   Updated: 2019/05/17 17:35:49 by ojessi           ###   ########.fr       */
+/*   Updated: 2019/05/18 19:39:38 by ojessi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-# define COUNT_ARG 16
+# define COUNT_ARG 20
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -50,7 +50,9 @@ int				ft_checkarg(va_list ap, char *str);
 int				ft_print_s(char *str, char *new);
 int				ft_print_di(long long int nbr, char *new);
 int				ft_print_c(char c, char *new);
-int				ft_print_Xox(long long int nbr, char *new, int base, int uppercase);
+int				ft_print_Xox(va_list ap, char *new, int base, int uppercase);
 int				ft_print_persent(char *new);
+int				ft_print_u(va_list ap, char *new);
+int				ft_print_p(long nbr, int uppercase, char *new);
 
 #endif

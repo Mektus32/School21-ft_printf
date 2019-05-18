@@ -32,7 +32,7 @@ int     ft_print_persent(char *new)
             	continue;
         	}
 			else
-				return (-1);//error
+				return (-2);//error
 		}
         if (t.a_dot == FALSE && t.a_nbr == -1 && t.s_type == FALSE &&
 			((new[i] >= '1' && new[i] <= '9') || new[i] == '*'))
@@ -40,7 +40,7 @@ int     ft_print_persent(char *new)
             if (new[i] >= '1' && new[i] <= '9')
                 i += ft_nbrlen((t.w_nbr = ft_atoi(&(new[i])))) - 1;
             else if (t.w_star == TRUE || (t.w_nbr != 0 && new[i] == '*'))
-				return (-1);//error
+				return (-2);//error
 			else if (new[i] == '*')
 				t.w_star = TRUE;
 			continue;
@@ -56,7 +56,7 @@ int     ft_print_persent(char *new)
 				t.a_nbr_bool = TRUE;
 			}
 			else if (t.a_star == TRUE)
-				return (-1);//error
+				return (-2);//error
 			if (new[i] == '*')
 			{
 				if (t.a_star == FALSE && t.a_nbr == -1)

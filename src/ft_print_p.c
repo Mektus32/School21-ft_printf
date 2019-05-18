@@ -1,30 +1,24 @@
 #include "ft_printf.h"
 
-int     ft_print_s(char *str, char *new)
+int     ft_print_p(long nbr, int uppercase, char *new)
 {
-    int     i;
+    int		i;
 	char	*tmp;
 	int		len;
     t_print t = {0,0,0,0,0,0,0,0,0,0,0,0,0,"00"};
-    
+
     i = -1;
-    t.w_nbr = -1;
-    t.a_nbr = 0;
-	if (str == NULL)
-	{
-		ft_putstr("(null)");
-		return (6);
-	}
+	t.a_nbr = -1;
     while(new[++i] != '\0')
     {
         if (new[i] == '-' || new[i] == '+' || new[i] == ' ' ||
 			new[i] == '#' || new[i] == '0' || new[i] == 39)
 		{
-			if (t.w_nbr == -1 && t.w_star == FALSE && t.a_dot == FALSE && t.a_nbr == 0 &&
+			if (t.w_nbr == 0 && t.w_star == FALSE && t.a_dot == FALSE && t.a_nbr == -1 &&
 			t.s_type == FALSE)
-        	{ 
+        	{
             	if (new[i] == '-')
-                	t.f_minus = TRUE;
+                    t.f_minus = TRUE;
             	else if (new[i] == '+')
                 	t.f_plus = TRUE;
             	else if (new[i] == ' ')
@@ -35,17 +29,17 @@ int     ft_print_s(char *str, char *new)
                 	t.f_zero = TRUE;
 				else if (new[i] == 39)
 					t.f_quote = TRUE;
-            	continue;//?
+            	continue;
         	}
 			else
 				return (-1);//error
 		}
-        if (t.a_dot == FALSE && t.a_nbr == 0 && t.s_type == FALSE &&
+        if (t.a_dot == FALSE && t.a_nbr == -1 && t.s_type == FALSE &&
 			((new[i] >= '1' && new[i] <= '9') || new[i] == '*'))
         {
             if (new[i] >= '1' && new[i] <= '9')
                 i += ft_nbrlen((t.w_nbr = ft_atoi(&(new[i])))) - 1;
-            else if (t.w_star == TRUE || (t.w_nbr != -1 && new[i] == '*'))
+            else if (t.w_star == TRUE || (t.w_nbr != 0 && new[i] == '*'))
 				return (-1);//error
 			else if (new[i] == '*')
 				t.w_star = TRUE;
@@ -55,6 +49,7 @@ int     ft_print_s(char *str, char *new)
 			t.a_dot = TRUE;
 		if (t.a_dot == TRUE && t.s_type == FALSE)
 		{
+			i++;
 			if ((new[i] >= '0' && new[i] <= '9') && t.a_star == FALSE)
 			{
 				i+= ft_nbrlen(t.a_nbr = ft_atoi(&(new[i]))) - 1;
@@ -64,7 +59,7 @@ int     ft_print_s(char *str, char *new)
 				return (-1);//error
 			if (new[i] == '*')
 			{
-				if (t.a_star == FALSE && t.a_nbr_bool == FALSE)
+				if (t.a_star == FALSE && t.a_nbr == -1)
 				{
 					t.a_star = TRUE;
 					i++;
@@ -73,26 +68,23 @@ int     ft_print_s(char *str, char *new)
 					return (-1);//error
 			}
 		}
-		if (new[i] == 'h' || new[i] == 'l' || new[i] == 'L')
+		if (new[i] == 'l' || new[i] == 'j')
 		{
 			t.s_type = TRUE;
 			t.s_str[0] = new[i];
-			t.s_str[1] = new[i + 1];
+			t.s_str[1] = new[i + 1];//?
 			i += 2;
 		}
     }
-	tmp = ft_strdup(str);
-	if (t.f_grid == TRUE || t.f_plus == TRUE || t.f_quote == TRUE
-		|| t.f_zero == TRUE || t.f_space == TRUE || t.s_type == TRUE)
-		return (-1);//error
-	if (t.a_dot == TRUE && t.a_nbr < (int)ft_strlen(tmp))
-		tmp = ft_free_strncpy(ft_strnew(t.a_nbr), tmp, t.a_nbr);
-	if (t.f_minus == TRUE && t.w_nbr > (int)ft_strlen(tmp))
-		tmp = ft_free_strjoin_duo(tmp, ft_memset(ft_strnew(t.w_nbr - ft_strlen(tmp)), ' ', t.w_nbr - ft_strlen(tmp)));
-	if (t.w_nbr > (int)ft_strlen(tmp) && t.f_minus == FALSE)
+	if (t.f_quote == TRUE || t.f_zero == TRUE || t.f_plus == TRUE ||
+		t.f_space == TRUE || t.f_grid == TRUE || t.a_dot == TRUE)
+		return (-1);
+	tmp = ft_itoa_base(nbr, 16, uppercase);
+	tmp = ft_free_join_rev("0x", tmp);
+	if (t.w_nbr > (int)ft_strlen(tmp))
 		tmp = ft_free_strjoin_duo(ft_memset(ft_strnew(t.w_nbr - ft_strlen(tmp)), ' ', t.w_nbr - ft_strlen(tmp)), tmp);
 	ft_putstr(tmp);
-	len = (int)ft_strlen(tmp);
+	len = ft_strlen(tmp);
 	free(tmp);
 	return (len);
 }

@@ -33,7 +33,7 @@ int     ft_print_di(long long int nbr, char *new)
             	continue;
         	}
 			else
-				exit(0);//error
+				return (-1);//error
 		}
         if (t.a_dot == FALSE && t.a_nbr == -1 && t.s_type == FALSE &&
 			((new[i] >= '1' && new[i] <= '9') || new[i] == '*'))
@@ -41,7 +41,7 @@ int     ft_print_di(long long int nbr, char *new)
             if (new[i] >= '1' && new[i] <= '9')
                 i += ft_nbrlen((t.w_nbr = ft_atoi(&(new[i])))) - 1;
             else if (t.w_star == TRUE || (t.w_nbr != 0 && new[i] == '*'))
-				exit(0);//error
+				return (-1);//error
 			else if (new[i] == '*')
 				t.w_star = TRUE;
 			continue;
@@ -57,7 +57,7 @@ int     ft_print_di(long long int nbr, char *new)
 				t.a_nbr_bool = TRUE;
 			}
 			else if (t.a_star == TRUE)
-				exit(0);//error
+				return (-1);//error
 			if (new[i] == '*')
 			{
 				if (t.a_star == FALSE && t.a_nbr == -1)
@@ -66,7 +66,7 @@ int     ft_print_di(long long int nbr, char *new)
 					i++;
 				}
 				else
-					exit(0);//error
+					return (-1);//error
 			}
 		}
 		if (new[i] == 'h' || new[i] == 'l' || new[i] == 'L' || new[i] == 'j' || new[i] == 'z')
@@ -78,7 +78,7 @@ int     ft_print_di(long long int nbr, char *new)
 		}
     }
 	if (t.f_grid == TRUE || t.s_str[0] == 'L')
-        exit(0);//error
+        return (-1);//error
     t.f_plus == TRUE ? t.f_space = FALSE : 0;
 	t.w_nbr = (t.f_plus == TRUE && nbr >= 0ll && (t.f_minus == TRUE || t.f_zero == TRUE)) ? t.w_nbr - 1 : t.w_nbr;
     if (t.f_minus == TRUE)

@@ -6,7 +6,7 @@
 /*   By: ojessi <ojessi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 20:22:31 by ojessi            #+#    #+#             */
-/*   Updated: 2019/05/17 17:55:37 by ojessi           ###   ########.fr       */
+/*   Updated: 2019/05/18 19:39:33 by ojessi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ static	void	ft_fill_array(char *array)
 	array[13] = 'r';//r
 	array[14] = 'k';//k
 	array[15] = '%';
+	array[16] = 'U';
+	array[17] = 'S';
+	array[18] = 'O';
+	array[19] = 'C';
+	array[20] = 'D';
 }
 
 static	char	*ft_params_arg(const char **format)
@@ -72,15 +77,25 @@ int		ft_printf(const char *format, ...)
 	len = 0;
 	while (*format)
 	{
+		
 		if (ft_strncmp(format, "%", 1) == 0)
 		{
 			if ((str = ft_params_arg(&format)) == NULL)
-				exit(0);
+			{
+				format++;
+				continue;
+			}
 			if ((tmplen = ft_checkarg(ap, str)) < 0)
-				{
-					free(str);
-					exit(0);
-				}
+			{
+				tmplen = 0;
+				if (str[tmplen] == ' ')
+					tmplen++;
+				len += ft_strlen(str + tmplen);
+				ft_putstr(str + tmplen);
+				free(str);
+				format++;
+				continue;
+			}
 			len += tmplen;
 			free(str);
 		}
