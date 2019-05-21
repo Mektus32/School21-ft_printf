@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ojessi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ojessi <ojessi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/07 14:04:09 by ojessi            #+#    #+#             */
-/*   Updated: 2019/05/07 14:04:44 by ojessi           ###   ########.fr       */
+/*   Created: 2019/04/07 18:41:58 by ojessi            #+#    #+#             */
+/*   Updated: 2019/05/20 20:58:38 by ojessi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-char	*ft_strnew(size_t size)
+char	*ft_strnew(int size)
 {
 	char	*ptr;
 

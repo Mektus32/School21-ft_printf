@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_truncf.c                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ojessi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ojessi <ojessi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/07 13:15:29 by ojessi            #+#    #+#             */
-/*   Updated: 2019/05/07 13:16:36 by ojessi           ###   ########.fr       */
+/*   Created: 2019/04/05 19:34:38 by ojessi            #+#    #+#             */
+/*   Updated: 2019/05/20 18:20:34 by ojessi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-float	ft_truncf(float nbr)
+char	*ft_strchr(const char *str, int ch)
 {
-	int		whole;
-	float	res;
+	int i;
 
-	whole = (int)nbr;
-	res = (float)whole;
-	return (res);
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == ch)
+			return ((char*)&str[i]);
+		i++;
+	}
+	if (ch == '\0')
+		return ((char*)&str[i]);
+	return (NULL);
 }

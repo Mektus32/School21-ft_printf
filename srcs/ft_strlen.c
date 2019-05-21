@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pow.c                                           :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ojessi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ojessi <ojessi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/07 13:55:13 by ojessi            #+#    #+#             */
-/*   Updated: 2019/05/07 13:56:42 by ojessi           ###   ########.fr       */
+/*   Created: 2019/04/04 21:34:01 by ojessi            #+#    #+#             */
+/*   Updated: 2019/05/20 20:21:41 by ojessi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-int		ft_pow(int nbr, int power)
+int		ft_strlen(const char *str)
 {
-	int		i;
-	int		res;
+	int i;
 
-	if (nbr == 0 && power == 0)
-		return (1);
-	else if (nbr == 0 && power != 0)
-		return (0);
-	i = -1;
-	res = 1;
-	while (++i < power)
-		res *= nbr;
-	return (res);
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
 }

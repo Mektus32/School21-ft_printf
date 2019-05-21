@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_absf.c                                          :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ojessi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ojessi <ojessi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/07 14:28:14 by ojessi            #+#    #+#             */
-/*   Updated: 2019/05/07 14:28:50 by ojessi           ###   ########.fr       */
+/*   Created: 2019/04/04 18:20:20 by ojessi            #+#    #+#             */
+/*   Updated: 2019/05/20 18:20:22 by ojessi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_absf(float *nbr)
+void	ft_bzero(void *s, size_t n)
 {
-	if (*nbr < 0)
-		*nbr *= -1;
+	unsigned char *str;
+
+	str = s;
+	while (n-- > 0)
+		*str++ = '\0';
 }
