@@ -2,6 +2,6 @@
 
 int     main(void)
 {
-    printf("\x1B[2m%s", "kek");
+    printf("%d, %d", 2, 1);
     return (0);
 }

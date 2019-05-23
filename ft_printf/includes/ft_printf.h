@@ -5,7 +5,8 @@
 
 # include <stdio.h>
 # include <stdarg.h>
-# include <unistd.h>
+//# include <unistd.h>
+# include <io.h>
 
 typedef	struct	s_doll
 {
@@ -43,6 +44,7 @@ typedef	struct		s_ob
 	va_list		ap[2];
 	int			i;
 	int			ret;
+	int			fd;
 	t_flag		flag;
 	t_type		type;
 	t_doll		dollar;
@@ -54,6 +56,7 @@ char	*ft_strchr(const char *str, int ch);
 int		ft_printf(const char *restrict fmt, ...);
 void	check_settings(const char *restrict fmt, t_ob *ob);
 void	check_args(const char *__restrict fmt, t_ob *ob);
-
-
+void	choise_specs(const char *restrict fmt, t_ob *ob);
+void	print_percent(t_ob *ob);
+void	print_char(t_ob *ob, char c);
 #endif

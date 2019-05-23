@@ -1,5 +1,15 @@
 #include "ft_printf.h"
 
+static	void	begin_check(const char *restrict fmt, t_ob *ob)
+{
+	init_flag(&(ob->flag));
+	ob->type = type_notype;
+    ob->dollar.dollar = 0;
+	ob->fd = 1;
+	check_args(fmt, ob);
+	choise_spec(fmt, ob);
+}
+
 static  void	init_flag(t_flag *flag)
 {
 	flag->minus = 0;
@@ -16,11 +26,8 @@ int	 ft_printf(const char *restrict fmt, ...)
 {
 	t_ob	ob;
 
-	init_flag(&(ob.flag));
-	ob.type = type_notype;
 	ob.ret = 0;
 	ob.i = 0;
-    ob.dollar.dollar = 0;
 	va_start(ob.ap[0], fmt);
 	va_copy(ob.ap[1], ob.ap[0]);
 	while (fmt[ob.i])
@@ -28,7 +35,7 @@ int	 ft_printf(const char *restrict fmt, ...)
 		if (fmt[ob.i] == '{')
 			check_settings(fmt, &ob);
 		else if (fmt[ob.i] == '%')
-			check_args(fmt, ob);
+			begin_check(fmt, &ob);
 	}
 	return (ob.ret);
 }
