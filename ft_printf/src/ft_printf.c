@@ -18,6 +18,7 @@ static  void	init_flag(t_flag *flag)
 	flag->hash = 0;
 	flag->zero = 0;
 	flag->quote = 0;
+	flag->dot = 0;
 	flag->weight = -1;
 	flag->plus = -1;
 }

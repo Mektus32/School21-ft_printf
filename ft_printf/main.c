@@ -2,6 +2,6 @@
 
 int     main(void)
 {
-    printf("%d, %d", 2, 1);
+    printf("%.s\n", "kek");
     return (0);
 }

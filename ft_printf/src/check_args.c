@@ -46,6 +46,7 @@ static	void	ft_get_type(const char *restrict fmt, t_ob *ob)
 
 static	void	ft_get_pre(const char *restrict fmt, t_ob *ob)
 {
+	ob->flag.dot = 1;
 	if (ISNUM(fmt[ob->i + 1]))
 	{
 		ob->i++;

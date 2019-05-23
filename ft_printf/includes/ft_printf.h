@@ -35,6 +35,7 @@ typedef	struct		s_flag
 	int		hash : 1;
 	int		zero : 1;
 	int		quote : 1;
+	int		dot : 1;
 	int		weight;
 	int		prec;
 }					t_flag;
@@ -54,9 +55,18 @@ typedef	struct		s_ob
 int		ft_strncmp(const char *str1, const char *str2, size_t n);
 char	*ft_strchr(const char *str, int ch);
 int		ft_printf(const char *restrict fmt, ...);
+char	*ft_free_strcpy(char *dest, char *source);
+char	*ft_strnew(size_t size);
+int		ft_strlen(const char *str);
+char	*ft_free_strjoin_duo(char const *s1, char const *s2);
+void	*ft_memset(void *memptr, int value, size_t num);
 void	check_settings(const char *restrict fmt, t_ob *ob);
 void	check_args(const char *__restrict fmt, t_ob *ob);
 void	choise_specs(const char *restrict fmt, t_ob *ob);
 void	print_percent(t_ob *ob);
-void	print_char(t_ob *ob, char c);
+void	print_char(t_ob *ob);
+void	print_str(t_ob *ob);
+void	init_str_arg(t_ob *ob);
+void	init_char_arg(t_ob *ob, int *c);
+void	init_int_arg(t_ob *ob, long *nbr);
 #endif
