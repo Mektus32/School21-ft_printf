@@ -7,6 +7,9 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <unistd.h>
+# include <wchar.h>
+# include <limits.h>
+# include <stdint.h>
 
 typedef	struct	s_doll
 {
@@ -36,8 +39,10 @@ typedef	struct		s_flag
 	int		zero : 1;
 	int		quote : 1;
 	int		dot : 1;
+	int		negativ : 1;
 	int		weight;
 	int		prec;
+
 }					t_flag;
 
 typedef	struct		s_ob
@@ -63,13 +68,19 @@ int		ft_atoi(const char *str);
 char	*ft_free_strncpy(char *dest, const char *new, size_t n);
 void	*ft_memset(void *memptr, int value, size_t num);
 char	*ft_strdup(const char *str);
+char	*ft_itoa(int n);
+char	*ft_ltoa(long n);
+char	*ft_free_strjoin_rev(char *src, char *new);
+char	*ft_strjoin(char const *s1, char const *s2);
 void	check_settings(const char *restrict fmt, t_ob *ob);
 void	check_args(const char *__restrict fmt, t_ob *ob);
 void	choise_specs(const char *restrict fmt, t_ob *ob);
 void	print_percent(t_ob *ob);
 void	print_char(t_ob *ob);
 void	print_str(t_ob *ob);
+void	print_int(t_ob *ob);
 void	init_str_arg(t_ob *ob, char **tmp);
 void	init_char_arg(t_ob *ob, int *c);
 void	init_int_arg(t_ob *ob, long *nbr);
+void	print_digit(t_ob *ob);
 #endif

@@ -2,6 +2,6 @@
 
 int     main(void)
 {
-    printf("%d\n", ft_printf("@moulitest: %s", NULL));
+    ft_printf("%.10d", 10);
     return (0);
 }	

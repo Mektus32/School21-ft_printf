@@ -21,7 +21,7 @@ void	init_str_arg(t_ob *ob, char **tmp)
 			*tmp = va_arg(ob->ap[0], char *);
 		return ;
 	}
-		*tmp = va_arg(ob->ap[0], char *);
+	*tmp = va_arg(ob->ap[0], char *);
 }
 
 void	init_char_arg(t_ob *ob, int *c)

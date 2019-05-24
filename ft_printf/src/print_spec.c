@@ -65,3 +65,37 @@ void	print_char(t_ob *ob)
 	ob->ret += write(ob->fd, 	OUT, ft_strlen(OUT));
 	free(OUT);
 }
+
+void	print_int(t_ob *ob)
+{
+	long	nbr;
+
+	init_int_arg(ob, &nbr);
+	ob->flag.minus ? ob->flag.zero = 0 : 0;
+	ob->flag.plus ? ob->flag.space = 0 : 0;
+	ob->flag.prec >= 0 ? ob->flag.zero = 0 : 0;
+	if (nbr == LLONG_MIN || nbr == LONG_MIN)
+		ob->out = ft_strdup("-9223372036854775808");
+	else if (ob->type == type_hh)
+	{
+		OUT = (char)nbr < 0 ? ft_itoa(-(char)nbr) : ft_itoa((char)nbr);
+		ob->flag.negativ = (char)nbr < 0 ? 1 : 0;
+	}
+	else if (ob->type == type_h)
+	{
+		OUT = (short)nbr < 0 ? ft_itoa(-(short)nbr) : ft_itoa((short)nbr);
+		ob->flag.negativ = (short)nbr < 0 ? 1 : 0 ;
+	}
+	else if (ob->type == type_notype)
+	{
+		OUT = (int)nbr < 0 ? ft_itoa(-(int)nbr) : ft_itoa((int)nbr);
+		ob->flag.negativ = (int)nbr < 0 ? 1 : 0;
+	}
+	else if (ob->type == type_j || ob->type == type_t || ob->type == type_l ||
+		ob->type == type_ll)
+	{
+		OUT = (long)nbr < 0 ? ft_ltoa(-(long)nbr) : ft_ltoa((long)nbr);
+		ob->flag.negativ = (long)nbr < 0 ? 1 : 0;
+	}
+	print_digit(ob);
+}
