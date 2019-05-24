@@ -12,16 +12,16 @@ void	init_int_arg(t_ob *ob, long *nbr)
 	*nbr = va_arg(ob->ap[0], long);
 }
 
-void	init_str_arg(t_ob *ob)
+void	init_str_arg(t_ob *ob, char **tmp)
 {
 	if (ob->dollar.dollar)
 	{
 		va_copy(ob->ap[0], ob->ap[1]);
 		while (--ob->dollar.num >= 0)
-			ob->out = va_arg(ob->ap[0], char *);
+			*tmp = va_arg(ob->ap[0], char *);
 		return ;
 	}
-		ob->out = va_arg(ob->ap[0], char *);
+		*tmp = va_arg(ob->ap[0], char *);
 }
 
 void	init_char_arg(t_ob *ob, int *c)
@@ -30,8 +30,8 @@ void	init_char_arg(t_ob *ob, int *c)
 	{
 		va_copy(ob->ap[0], ob->ap[1]);
 		while (--ob->dollar.num >= 0)
-			c = va_arg(ob->ap[0], int);
+			*c = va_arg(ob->ap[0], int);
 		return ;
 	}
-	c = va_arg(ob->ap[0], int);
+	*c = va_arg(ob->ap[0], int);
 }

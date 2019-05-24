@@ -4,9 +4,9 @@
 # define ISNUM(x) (x >= '0' && x <= '9')
 
 # include <stdio.h>
+# include <stdlib.h>
 # include <stdarg.h>
-//# include <unistd.h>
-# include <io.h>
+# include <unistd.h>
 
 typedef	struct	s_doll
 {
@@ -59,14 +59,17 @@ char	*ft_free_strcpy(char *dest, char *source);
 char	*ft_strnew(size_t size);
 int		ft_strlen(const char *str);
 char	*ft_free_strjoin_duo(char const *s1, char const *s2);
+int		ft_atoi(const char *str);
+char	*ft_free_strncpy(char *dest, const char *new, size_t n);
 void	*ft_memset(void *memptr, int value, size_t num);
+char	*ft_strdup(const char *str);
 void	check_settings(const char *restrict fmt, t_ob *ob);
 void	check_args(const char *__restrict fmt, t_ob *ob);
 void	choise_specs(const char *restrict fmt, t_ob *ob);
 void	print_percent(t_ob *ob);
 void	print_char(t_ob *ob);
 void	print_str(t_ob *ob);
-void	init_str_arg(t_ob *ob);
+void	init_str_arg(t_ob *ob, char **tmp);
 void	init_char_arg(t_ob *ob, int *c);
 void	init_int_arg(t_ob *ob, long *nbr);
 #endif

@@ -24,9 +24,12 @@ void    print_percent(t_ob *ob)
 
 void    print_str(t_ob *ob)
 {
-    init_str_arg(ob);
+	char	*tmp;
+    
+	init_str_arg(ob, &tmp);
+	OUT = tmp == NULL ? ft_strdup("(null)") : ft_strdup(tmp);
     if (PREC < ft_strlen(OUT) && ob->flag.dot)
-		OUT = ft_free_strcpy(ft_strnew(PREC < 0 ? 0 : PREC), OUT,
+		OUT = ft_free_strncpy(ft_strnew(PREC < 0 ? 0 : PREC), OUT,
 			PREC < 0 ? 0 : PREC);
 	if (MNS && WGH > ft_strlen(OUT))
 		OUT = ft_free_strjoin_duo(OUT, ft_memset(ft_strnew(WGH - 
@@ -35,7 +38,7 @@ void    print_str(t_ob *ob)
 		OUT = ft_free_strjoin_duo(ft_memset(ft_strnew(WGH - 
 			ft_strlen(OUT)), ' ', WGH - ft_strlen(OUT)), OUT);
 	ob->i++;
-	ob->ret += write(ob->fd, &OUT, ft_strlen(OUT));
+	ob->ret += write(ob->fd, OUT, ft_strlen(OUT));
 	free(OUT);
 }
 
@@ -47,7 +50,7 @@ void	print_char(t_ob *ob)
 	ob->i++;
 	if (c == 0)
 	{
-		while (--WGH)
+		while (--WGH > 0)
 			ob->ret += write(ob->fd, " ", 1);
 		ob->ret += write(ob->fd, "\0", 1);
 		return ;
@@ -59,6 +62,6 @@ void	print_char(t_ob *ob)
 	if (WGH > ft_strlen(OUT))
 		OUT = ft_free_strjoin_duo(ft_memset(ft_strnew(WGH - ft_strlen(OUT)),
 			' ', WGH - ft_strlen(OUT)), OUT);
-	ob->ret += write(ob->fd, &OUT, ft_strlen(OUT));
+	ob->ret += write(ob->fd, 	OUT, ft_strlen(OUT));
 	free(OUT);
 }

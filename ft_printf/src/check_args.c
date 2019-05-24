@@ -7,7 +7,7 @@ static	void	ft_check_dollar(const char *restrict fmt, t_ob *ob)
 	tmp = ob->i;
 	if (ISNUM(fmt[tmp]))
 	{
-		ob->dollar.num = ft_atoi(fmt[tmp]);
+		ob->dollar.num = ft_atoi(fmt + tmp);
 		while (ISNUM(fmt[tmp]))
 			tmp++;
 		if (fmt[tmp] == '$')
@@ -44,13 +44,13 @@ static	void	ft_get_type(const char *restrict fmt, t_ob *ob)
 		ob->type = type_L;
 }
 
-static	void	ft_get_pre(const char *restrict fmt, t_ob *ob)
+static	void	ft_get_prec(const char *restrict fmt, t_ob *ob)
 {
 	ob->flag.dot = 1;
 	if (ISNUM(fmt[ob->i + 1]))
 	{
 		ob->i++;
-		ob->flag.prec = ft_atoi(fmt[ob->i]);
+		ob->flag.prec = ft_atoi(fmt + ob->i);
 		while (ISNUM(fmt[ob->i]))
 			ob->i++;
 	}
@@ -59,6 +59,8 @@ static	void	ft_get_pre(const char *restrict fmt, t_ob *ob)
 		ob->flag.prec = va_arg(ob->ap[0], int);
 		ob->i += 2;
 	}
+	else
+		ob->i++;
 }
 
 static	void	ft_get_weight(t_ob *ob)
@@ -88,7 +90,7 @@ void	check_args(const char *restrict fmt, t_ob *ob)
 			ft_get_prec(fmt, ob);
 		else if (ISNUM(fmt[ob->i]))
 		{
-			ob->flag.weight = ft_atoi(fmt[ob->i]);
+			ob->flag.weight = ft_atoi(fmt + ob->i);
 			while (ISNUM(fmt[ob->i]))
 				ob->i++;
 		}

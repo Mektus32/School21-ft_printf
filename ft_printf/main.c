@@ -2,6 +2,6 @@
 
 int     main(void)
 {
-    printf("%.s\n", "kek");
+    printf("%d\n", ft_printf("@moulitest: %s", NULL));
     return (0);
-}
+}	

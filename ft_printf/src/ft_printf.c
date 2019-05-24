@@ -1,15 +1,5 @@
 #include "ft_printf.h"
 
-static	void	begin_check(const char *restrict fmt, t_ob *ob)
-{
-	init_flag(&(ob->flag));
-	ob->type = type_notype;
-    ob->dollar.dollar = 0;
-	ob->fd = 1;
-	check_args(fmt, ob);
-	choise_spec(fmt, ob);
-}
-
 static  void	init_flag(t_flag *flag)
 {
 	flag->minus = 0;
@@ -23,11 +13,22 @@ static  void	init_flag(t_flag *flag)
 	flag->plus = -1;
 }
 
+static	void	begin_check(const char *restrict fmt, t_ob *ob)
+{
+	ob->i++;
+	init_flag(&(ob->flag));
+	ob->type = type_notype;
+    ob->dollar.dollar = 0;
+	check_args(fmt, ob);
+	choise_specs(fmt, ob);
+}
+
 int	 ft_printf(const char *restrict fmt, ...)
 {
 	t_ob	ob;
 
 	ob.ret = 0;
+	ob.fd = 1;
 	ob.i = 0;
 	va_start(ob.ap[0], fmt);
 	va_copy(ob.ap[1], ob.ap[0]);
@@ -37,6 +38,8 @@ int	 ft_printf(const char *restrict fmt, ...)
 			check_settings(fmt, &ob);
 		else if (fmt[ob.i] == '%')
 			begin_check(fmt, &ob);
+		else
+			ob.ret += write(ob.fd, &fmt[ob.i++], 1);
 	}
 	return (ob.ret);
 }

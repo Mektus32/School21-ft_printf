@@ -74,14 +74,14 @@ void	check_settings(const char *restrict fmt, t_ob *ob)
 	int	 tmp;
 
 	tmp = ob->i;
-	if (ft_strncmp(fmt[tmp], "{off}", 5))
+	if (ft_strncmp(fmt + tmp, "{off}", 5))
 	{
 		ob->ret += write(ob->fd, "\x1B[0m", 4);
 		ob->i += 5;
 	}
-	else if (ft_strncmp(fmt[tmp], "{set:", 5))
+	else if (ft_strncmp(fmt + tmp, "{set:", 5))
 		set_options(fmt, ob);
-	else if (ft_strncmp(fmt[tmp], "{bgc:", 5))
+	else if (ft_strncmp(fmt + tmp, "{bgc:", 5))
 		set_background(fmt, ob);
 	else
 		set_color(fmt, ob);

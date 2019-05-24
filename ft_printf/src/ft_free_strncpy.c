@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_strcpy.c                                   :+:      :+:    :+:   */
+/*   ft_free_strncpy.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ojessi <ojessi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/04 21:45:30 by ojessi            #+#    #+#             */
-/*   Updated: 2019/05/18 16:25:47 by ojessi           ###   ########.fr       */
+/*   Created: 2019/04/04 22:03:04 by ojessi            #+#    #+#             */
+/*   Updated: 2019/05/24 12:43:50 by ojessi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_free_strcpy(char *dest, char *source)
+char	*ft_free_strncpy(char *dest, const char *new, size_t n)
 {
-	int i;
-	int	j;
+	size_t	i;
+	int		f;
 
-	i = 8;
-	j = 0;
-	while (source[i] != '\0')
+	f = 0;
+	i = 0;
+	while (new[i] != '\0' && i < n)
 	{
-		dest[j] = source[i];
+		dest[i] = new[i];
 		i++;
-		j++;
 	}
-	free(source);
-	dest[j] = '\0';
+	while (i < n)
+	{
+		dest[i] = '\0';
+		i++;
+	}
+	free((char*)new);
 	return (dest);
 }
