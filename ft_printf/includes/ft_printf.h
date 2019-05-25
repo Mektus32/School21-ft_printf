@@ -6,7 +6,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdarg.h>
-# include <unistd.h>
+//# include <unistd.h>
+# include <io.h>
 # include <wchar.h>
 # include <limits.h>
 # include <stdint.h>
