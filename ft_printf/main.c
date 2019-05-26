@@ -2,6 +2,8 @@
 
 int     main(void)
 {
-	ft_printf("%o", 40);
+	int		i;
+
+	printf("%d, %d\n", ft_printf("%"), printf("%"));
 	return (0);
 }

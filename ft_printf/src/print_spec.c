@@ -29,6 +29,9 @@ void    print_str(t_ob *ob)
     
 	init_str_arg(ob, &tmp);
 	OUT = tmp == NULL ? ft_strdup("(null)") : ft_strdup(tmp);
+	if (ob->flag.zero && ob->flag.weight > ft_strlen(OUT))
+		OUT = ft_free_strjoin_duo(ft_memset(ft_strnew(WGH - ft_strlen(OUT)), 
+		'0', WGH - ft_strlen(OUT)), OUT);
     if (PREC < ft_strlen(OUT) && ob->flag.dot)
 		OUT = ft_free_strncpy(ft_strnew(PREC < 0 ? 0 : PREC), OUT,
 			PREC < 0 ? 0 : PREC);
@@ -57,6 +60,9 @@ void	print_char(t_ob *ob)
 		return ;
 	}
 	OUT = ft_memset(ft_strnew(1), c, 1);
+	if (ob->flag.zero && WGH > ft_strlen(OUT))
+		OUT = ft_free_strjoin_duo(ft_memset(ft_strnew(WGH - ft_strlen(OUT)), 
+		'0', WGH - ft_strlen(OUT)), OUT);
 	if (MNS && WGH > ft_strlen(OUT))
 		OUT = ft_free_strjoin_duo(OUT, ft_memset(ft_strnew(WGH - 
 			ft_strlen(OUT)), ' ', WGH - ft_strlen(OUT)));

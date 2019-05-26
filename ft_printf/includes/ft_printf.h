@@ -77,6 +77,7 @@ char 	*ft_ultoa_base(unsigned long n, int base);
 char	*ft_free_strjoin_rev(char *src, char *new);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_tolower(char *str);
+char	*ft_ltoa_base(long n, int base);
 void	check_settings(const char *restrict fmt, t_ob *ob);
 void	check_args(const char *__restrict fmt, t_ob *ob);
 void	choise_specs(const char *restrict fmt, t_ob *ob);
@@ -91,4 +92,5 @@ void	print_digit(t_ob *ob);
 void	print_unsint(t_ob *ob, char c);
 void	print_base(t_ob *ob, char c);
 void	print_xox(t_ob *ob, char c, long nbr);
+void	print_pointer(t_ob *ob);
 #endif

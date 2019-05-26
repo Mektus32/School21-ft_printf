@@ -20,7 +20,6 @@ static  void	set_options(const char *restrict fmt, t_ob *ob)
 		ob->ret += write(ob->fd,"\x1B[28m", 5);
 	else
 		return ;
-	ob->i += 8;
 }
 
 static  void	set_background(const char *restrict fmt, t_ob *ob)
@@ -43,7 +42,6 @@ static  void	set_background(const char *restrict fmt, t_ob *ob)
 		ob->ret += write(ob->fd,"\x1B[47m", 5);
 	else
 		return ;
-	ob->i += 9;
 }
 
 static  void	set_color(const char *restrict fmt, t_ob *ob)
@@ -66,7 +64,6 @@ static  void	set_color(const char *restrict fmt, t_ob *ob)
 		ob->ret += write(ob->fd, "\x1B[37m", 5);
 	else
 		return ;
-	ob->i += 5;
 }
 
 void	check_settings(const char *restrict fmt, t_ob *ob)
@@ -74,17 +71,17 @@ void	check_settings(const char *restrict fmt, t_ob *ob)
 	int	 tmp;
 
 	tmp = ob->i;
-	if (ft_strncmp(fmt + tmp, "{off}", 5))
+	if (!ft_strncmp(fmt + tmp, "{off}", 5))
 	{
 		ob->ret += write(ob->fd, "\x1B[0m", 4);
 		ob->i += 5;
 	}
-	else if (ft_strncmp(fmt + tmp, "{set:", 5))
+	else if (!ft_strncmp(fmt + tmp, "{set:", 5))
 		set_options(fmt, ob);
-	else if (ft_strncmp(fmt + tmp, "{bgc:", 5))
+	else if (!ft_strncmp(fmt + tmp, "{bgc:", 5))
 		set_background(fmt, ob);
 	else
 		set_color(fmt, ob);
 	if (tmp == ob->i)
-		ob->i += write(ob->fd, &fmt[ob->i++], 1);
+		ob->ret += write(ob->fd, &fmt[ob->i++], 1);
 }
