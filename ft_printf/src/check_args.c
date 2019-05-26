@@ -20,16 +20,16 @@ static	void	ft_check_dollar(const char *restrict fmt, t_ob *ob)
 
 static	void	ft_get_type(const char *restrict fmt, t_ob *ob)
 {
-	if (fmt[ob->i] == 'h' && fmt[ob->i] != 'h')
+	if (fmt[ob->i] == 'h' && fmt[ob->i + 1] != 'h')
 		ob->type = type_h;
-	else if (fmt[ob->i] == 'h' && fmt[ob->i] == 'h')
+	else if (fmt[ob->i] == 'h' && fmt[ob->i + 1] == 'h')
 	{
 		ob->type = type_hh;
 		ob->i++;
 	}
-	else if (fmt[ob->i] == 'l' && fmt[ob->i] != 'l')
+	else if (fmt[ob->i] == 'l' && fmt[ob->i + 1] != 'l')
 		ob->type = type_l;
-	else if (fmt[ob->i] == 'l' && fmt[ob->i] == 'l')
+	else if (fmt[ob->i] == 'l' && fmt[ob->i + 1] == 'l')
 	{
 		ob->type = type_ll;
 		ob->i++;

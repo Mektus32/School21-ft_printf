@@ -7,6 +7,11 @@
 
 void    print_digit(t_ob *ob)
 {
+	if (ob->flag.dot && !ft_atoi(ob->out))
+	{
+		free(ob->out);
+		ob->out = ft_strdup("");
+	}
 	if (LENA > 0)
 		ob->out = ft_free_strjoin_rev(ft_memset(ft_strnew(LENA), '0', LENA),
 		 ob->out);
@@ -16,8 +21,8 @@ void    print_digit(t_ob *ob)
 		ob->out = ft_free_strjoin_duo(ft_memset(ft_strnew(NEG ? LENW - 1 
 			: LENW), '0', NEG ? LENW - 1 : LENW), ob->out);
 	if (ob->flag.minus && (NEG ? LENW - 1 > 0 : LENW > 0))
-		ob->out = ft_free_strjoin_duo(ft_memset(ft_strnew(NEG ? LENW - 1 
-			: LENW), ' ', NEG ? LENW - 1 : LENW), ob->out);
+		ob->out = ft_free_strjoin_duo(ob->out,ft_memset(ft_strnew(NEG ? LENW - 1 
+			: LENW), ' ', NEG ? LENW - 1 : LENW));
 	if (ob->flag.plus)
 		ob->out = ft_free_strjoin_rev(ob->flag.negativ ? "-" : "+", ob->out);
 	else if (!ob->flag.plus && ob->flag.negativ)
@@ -29,3 +34,4 @@ void    print_digit(t_ob *ob)
 	ob->ret += write(ob->fd, ob->out, ft_strlen(ob->out));
 	free (ob->out);
 }
+

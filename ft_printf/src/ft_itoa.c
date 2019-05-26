@@ -6,7 +6,7 @@
 /*   By: ojessi <ojessi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 15:15:50 by ojessi            #+#    #+#             */
-/*   Updated: 2019/05/24 19:00:30 by ojessi           ###   ########.fr       */
+/*   Updated: 2019/05/26 10:42:31 by ojessi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char			*ft_itoa(int n)
 	char	*str;
 
 	if (n == INT_MIN)
-		return (ft_strdup("-2147483648"));
+		return (ft_strdup("2147483648"));
 	tmpn = n;
 	len = 2;
 	negative = 0;

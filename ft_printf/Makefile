@@ -1,7 +1,7 @@
 NAME = libftprintf.a
 SRC = src/*.c
 HEAD = includes/
-FLAGS = -c -Wextra -Werror -Wall
+FLAGS = -c #-Wextra -Werror -Wall
 
 all: $(NAME)
 

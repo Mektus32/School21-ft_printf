@@ -3,6 +3,7 @@
 #define MNS (ob->flag.minus)
 #define WGH (ob->flag.weight)
 #define OUT (ob->out)
+#define NBR nbr < 0
 
 void    print_percent(t_ob *ob)
 {
@@ -78,24 +79,24 @@ void	print_int(t_ob *ob)
 		ob->out = ft_strdup("-9223372036854775808");
 	else if (ob->type == type_hh)
 	{
-		OUT = (char)nbr < 0 ? ft_itoa(-(char)nbr) : ft_itoa((char)nbr);
-		ob->flag.negativ = (char)nbr < 0 ? 1 : 0;
+		OUT = (char)NBR ? ft_itoa(-(char)nbr) : ft_itoa((char)nbr);
+		ob->flag.negativ = (char)NBR ? 1 : 0;
 	}
 	else if (ob->type == type_h)
 	{
-		OUT = (short)nbr < 0 ? ft_itoa(-(short)nbr) : ft_itoa((short)nbr);
-		ob->flag.negativ = (short)nbr < 0 ? 1 : 0 ;
+		OUT = (short)NBR ? ft_itoa(-(short)nbr) : ft_itoa((short)nbr);
+		ob->flag.negativ = (short)NBR ? 1 : 0;
 	}
 	else if (ob->type == type_notype)
 	{
-		OUT = (int)nbr < 0 ? ft_itoa(-(int)nbr) : ft_itoa((int)nbr);
-		ob->flag.negativ = (int)nbr < 0 ? 1 : 0;
+		OUT = (int)NBR ? ft_itoa(-(int)nbr) : ft_itoa((int)nbr);
+		ob->flag.negativ = (int)NBR ? 1 : 0;
 	}
 	else if (ob->type == type_j || ob->type == type_t || ob->type == type_l ||
 		ob->type == type_ll)
 	{
-		OUT = (long)nbr < 0 ? ft_ltoa(-(long)nbr) : ft_ltoa((long)nbr);
-		ob->flag.negativ = (long)nbr < 0 ? 1 : 0;
+		OUT = (long)NBR ? ft_ltoa(-(long)nbr) : ft_ltoa((long)nbr);
+		ob->flag.negativ = (long)NBR ? 1 : 0;
 	}
 	print_digit(ob);
 }

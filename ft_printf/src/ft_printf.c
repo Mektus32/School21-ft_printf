@@ -10,7 +10,8 @@ static  void	init_flag(t_flag *flag)
 	flag->quote = 0;
 	flag->dot = 0;
 	flag->weight = -1;
-	flag->plus = -1;
+	flag->prec = -1;
+	flag->negativ = 0;
 }
 
 static	void	begin_check(const char *restrict fmt, t_ob *ob)

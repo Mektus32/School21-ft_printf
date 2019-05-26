@@ -1,13 +1,14 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 # define FLAGS " #*+-.0123456789Lhjltz"
+# define PRECS "fageFAGE"
+# define OX "oxOX"
 # define ISNUM(x) (x >= '0' && x <= '9')
 
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdarg.h>
-//# include <unistd.h>
-# include <io.h>
+# include <unistd.h>
 # include <wchar.h>
 # include <limits.h>
 # include <stdint.h>
@@ -70,9 +71,12 @@ char	*ft_free_strncpy(char *dest, const char *new, size_t n);
 void	*ft_memset(void *memptr, int value, size_t num);
 char	*ft_strdup(const char *str);
 char	*ft_itoa(int n);
-char	*ft_ltoa(long n);
+char	*ft_ltoa(long sn);
+char    *ft_ultoa(unsigned long n);
+char 	*ft_ultoa_base(unsigned long n, int base);
 char	*ft_free_strjoin_rev(char *src, char *new);
 char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_tolower(char *str);
 void	check_settings(const char *restrict fmt, t_ob *ob);
 void	check_args(const char *__restrict fmt, t_ob *ob);
 void	choise_specs(const char *restrict fmt, t_ob *ob);
@@ -84,4 +88,7 @@ void	init_str_arg(t_ob *ob, char **tmp);
 void	init_char_arg(t_ob *ob, int *c);
 void	init_int_arg(t_ob *ob, long *nbr);
 void	print_digit(t_ob *ob);
+void	print_unsint(t_ob *ob, char c);
+void	print_base(t_ob *ob, char c);
+void	print_xox(t_ob *ob, char c, long nbr);
 #endif
