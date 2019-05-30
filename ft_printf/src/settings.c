@@ -20,6 +20,7 @@ static  void	set_options(const char *restrict fmt, t_ob *ob)
 		ob->ret += write(ob->fd,"\x1B[28m", 5);
 	else
 		return ;
+	ob->i += 8;
 }
 
 static  void	set_background(const char *restrict fmt, t_ob *ob)
@@ -42,6 +43,7 @@ static  void	set_background(const char *restrict fmt, t_ob *ob)
 		ob->ret += write(ob->fd,"\x1B[47m", 5);
 	else
 		return ;
+	ob->i += 9;
 }
 
 static  void	set_color(const char *restrict fmt, t_ob *ob)
@@ -64,6 +66,7 @@ static  void	set_color(const char *restrict fmt, t_ob *ob)
 		ob->ret += write(ob->fd, "\x1B[37m", 5);
 	else
 		return ;
+	ob->i += 5;
 }
 
 void	check_settings(const char *restrict fmt, t_ob *ob)

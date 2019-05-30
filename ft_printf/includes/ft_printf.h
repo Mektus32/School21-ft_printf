@@ -2,7 +2,7 @@
 # define FT_PRINTF_H
 # define FLAGS " #*+-.0123456789Lhjltz"
 # define PRECS "fageFAGE"
-# define OX "oxOX"
+# define BOX "boxBOX"
 # define ISNUM(x) (x >= '0' && x <= '9')
 
 # include <stdio.h>
@@ -93,4 +93,6 @@ void	print_unsint(t_ob *ob, char c);
 void	print_base(t_ob *ob, char c);
 void	print_xox(t_ob *ob, char c, long nbr);
 void	print_pointer(t_ob *ob);
+void	print_non_printabl(t_ob *ob);
+
 #endif

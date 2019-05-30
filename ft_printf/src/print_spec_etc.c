@@ -42,8 +42,15 @@ void	print_base(t_ob *ob, char c)
 		tmp = (unsigned char)nbr;
 	if (c == 'o' || c == 'O')
 		OUT = ft_ultoa_base(tmp, 8);
-	else
+	else if (c == 'x' || c == 'X')
 		OUT = ft_ultoa_base(tmp, 16);
+	else
+	{
+		ob->i++;
+		ob->ret += write(ob->fd, (OUT = ft_ultoa_base(tmp, 2)), ft_strlen(OUT));
+		free(OUT);
+		return ;
+	}
 	ob->flag.minus ? ob->flag.zero = 0 : 0;
 	print_xox(ob, c, nbr);
 }

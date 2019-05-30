@@ -2,10 +2,12 @@
 
 static	void	choise_specs_etc(const char *restrict fmt, t_ob *ob)
 {
-	if (ft_strchr(OX, fmt[ob->i]))
+	if (ft_strchr(BOX, fmt[ob->i]))
 		print_base(ob, fmt[ob->i]);
 	else if (fmt[ob->i] == 'p' || fmt[ob->i] == 'P')
 		print_pointer(ob);
+	else if (fmt[ob->i] == 'r')
+		print_non_printabl(ob);
 }
 
 void	choise_specs(const char *restrict fmt, t_ob *ob)
