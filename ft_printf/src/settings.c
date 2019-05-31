@@ -18,6 +18,8 @@ static  void	set_options(const char *restrict fmt, t_ob *ob)
 		ob->ret += write(ob->fd,"\x1B[8m", 4);
 	else if (!ft_strncmp(fmt + ob->i, "{set:rv}", 8))
 		ob->ret += write(ob->fd,"\x1B[28m", 5);
+	else if (!ft_strncmp(fmt + ob->i, "{set:fd}", 8))
+		init_int_arg(ob, &ob->fd);
 	else
 		return ;
 	ob->i += 8;

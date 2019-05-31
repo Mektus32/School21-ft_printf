@@ -58,10 +58,13 @@ void	print_base(t_ob *ob, char c)
 void	print_pointer(t_ob *ob)
 {
 	long	nbr;
-
+	
 	init_int_arg(ob, &nbr);
 	OUT = ft_ltoa_base(nbr, 16);
 	OUT = ft_free_strjoin_duo(ft_strdup("0X"), OUT);
+	if (ob->flag.minus && WGH > ft_strlen(OUT))
+		OUT = ft_free_strjoin_duo(OUT, ft_memset(ft_strnew(WGH - 
+			ft_strlen(OUT)), ' ', WGH - ft_strlen(OUT)));
 	if (WGH > ft_strlen(OUT))
 		OUT = ft_free_strjoin_duo(ft_memset(ft_strnew(WGH - ft_strlen(OUT)), 
 			' ', WGH - ft_strlen(OUT)), OUT);

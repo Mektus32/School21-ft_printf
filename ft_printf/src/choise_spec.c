@@ -21,12 +21,12 @@ void	choise_specs(const char *restrict fmt, t_ob *ob)
 		|| fmt[ob->i] == 'S' || fmt[ob->i] == 'C')
 		fmt[ob->i] == 'c' ? print_char(ob) : print_str(ob);
 	else if ((fmt[ob->i] == 'd' || fmt[ob->i] == 'i' || fmt[ob->i] == 'D') && ob->type != type_z)
-		print_int(ob);
+		print_int(ob, fmt);
 	else if (fmt[ob->i] == 'u' || fmt[ob->i] == 'U' ||
 		((fmt[ob->i] == 'd' || fmt[ob->i] == 'i') && ob->type == type_z))
 		print_unsint(ob, fmt[ob->i]);
-	else if (ft_strchr(PRECS, fmt[ob->i]))
-		printf("c = %c", fmt[ob->i]);
+	else if (fmt[ob->i] == 'f')// || fmt[ob->i] == 'F')
+		print_double(ob);
 	else
 		choise_specs_etc(fmt, ob);
 }

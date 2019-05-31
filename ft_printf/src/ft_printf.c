@@ -28,6 +28,7 @@ int	 ft_printf(const char *restrict fmt, ...)
 {
 	t_ob	ob;
 
+
 	ob.ret = 0;
 	ob.fd = 1;
 	ob.i = 0;

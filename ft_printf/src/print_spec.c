@@ -73,7 +73,7 @@ void	print_char(t_ob *ob)
 	free(OUT);
 }
 
-void	print_int(t_ob *ob)
+void	print_int(t_ob *ob, const char *restrict fmt)
 {
 	long	nbr;
 
@@ -81,6 +81,7 @@ void	print_int(t_ob *ob)
 	ob->flag.minus ? ob->flag.zero = 0 : 0;
 	ob->flag.plus ? ob->flag.space = 0 : 0;
 	ob->flag.prec >= 0 ? ob->flag.zero = 0 : 0;
+	fmt[ob->i] == 'D' ? ob->type = type_l : 0;
 	if (nbr == LLONG_MIN || nbr == LONG_MIN)
 		ob->out = ft_strdup("-9223372036854775808");
 	else if (ob->type == type_hh)

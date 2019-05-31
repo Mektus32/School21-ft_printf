@@ -35,3 +35,15 @@ void	init_char_arg(t_ob *ob, int *c)
 	}
 	*c = va_arg(ob->ap[0], int);
 }
+
+void	init_double_arg(t_ob *ob, long double *nbr)
+{
+	if (ob->dollar.dollar)
+	{
+		va_copy(ob->ap[0], ob->ap[1]);
+		while (--ob->dollar.num >= 0)
+			*nbr = va_arg(ob->ap[0], long double);
+		return ;
+	}
+	*nbr = va_arg(ob->ap[0], long double);
+}

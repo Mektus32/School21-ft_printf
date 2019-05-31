@@ -75,9 +75,9 @@ static	void	ft_get_weight(t_ob *ob)
 
 void	check_args(const char *restrict fmt, t_ob *ob)
 {
-	ft_check_dollar(fmt, ob);
 	while (ft_strchr(FLAGS, fmt[ob->i]))
 	{
+		ft_check_dollar(fmt, ob);
 		fmt[ob->i] == '-' ? ob->flag.minus = 1 : 0;
 		fmt[ob->i] == '+' ? ob->flag.plus = 1 : 0;
 		fmt[ob->i] == ' ' ? ob->flag.space = 1 : 0;

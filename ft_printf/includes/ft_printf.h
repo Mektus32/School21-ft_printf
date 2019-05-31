@@ -1,7 +1,6 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-# define FLAGS " #*+-.0123456789Lhjltz"
-# define PRECS "fageFAGE"
+# define FLAGS " #*+-.0123456789Lhjltz$"
 # define BOX "boxBOX"
 # define ISNUM(x) (x >= '0' && x <= '9')
 
@@ -52,7 +51,7 @@ typedef	struct		s_ob
 	va_list		ap[2];
 	int			i;
 	int			ret;
-	int			fd;
+	long		fd;
 	t_flag		flag;
 	t_type		type;
 	t_doll		dollar;
@@ -78,21 +77,25 @@ char	*ft_free_strjoin_rev(char *src, char *new);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_tolower(char *str);
 char	*ft_ltoa_base(long n, int base);
+char    *ft_ftoa(long double nbr);
 void	check_settings(const char *restrict fmt, t_ob *ob);
 void	check_args(const char *__restrict fmt, t_ob *ob);
 void	choise_specs(const char *restrict fmt, t_ob *ob);
 void	print_percent(t_ob *ob);
 void	print_char(t_ob *ob);
 void	print_str(t_ob *ob);
-void	print_int(t_ob *ob);
+void	print_int(t_ob *ob, const char *restrict fmt);
 void	init_str_arg(t_ob *ob, char **tmp);
 void	init_char_arg(t_ob *ob, int *c);
 void	init_int_arg(t_ob *ob, long *nbr);
+void	init_double_arg(t_ob *ob, long double *nbr);
 void	print_digit(t_ob *ob);
 void	print_unsint(t_ob *ob, char c);
 void	print_base(t_ob *ob, char c);
 void	print_xox(t_ob *ob, char c, long nbr);
 void	print_pointer(t_ob *ob);
 void	print_non_printabl(t_ob *ob);
+void	print_double(t_ob *ob);
+
 
 #endif
