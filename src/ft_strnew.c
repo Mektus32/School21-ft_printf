@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_checkarg.c                                      :+:      :+:    :+:   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ojessi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/06 21:04:42 by ojessi            #+#    #+#             */
-/*   Updated: 2019/05/07 17:15:23 by ojessi           ###   ########.fr       */
+/*   Created: 2019/05/07 14:04:09 by ojessi            #+#    #+#             */
+/*   Updated: 2019/05/07 14:04:44 by ojessi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_checkarg(va_list ap, char *str)
+char	*ft_strnew(size_t size)
 {
-	int		i;
+	char	*ptr;
 
-	i = -1;
-	while (str[++i] != '\0')
-		if (str[i] == 's')
-			ft_print_s(va_arg(ap, char *), str);
-		else if (str[i] == 'd')
-			ft_putnbr(va_arg(ap, int));
-		else if (str[i] == 'c')
-			ft_putchar((char)va_arg(ap, int));
-		else if (str[i] == 'f')
-			ft_putfnbr(va_arg(ap, double), 6);
+	ptr = NULL;
+	ptr = (char*)malloc(sizeof(char) * (size + 1));
+	if (ptr)
+		return ((char*)ft_memset(ptr, '\0', size + 1));
+	else
+		return (NULL);
 }

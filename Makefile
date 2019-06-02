@@ -1,30 +1,18 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: ojessi <marvin@42.fr>                      +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/05/06 20:39:18 by ojessi            #+#    #+#              #
-#    Updated: 2019/05/06 20:42:47 by ojessi           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-NAME = printf
-SRC = libft/*.c\
-	  src/*.c
-HEAD = includes
-FLAGS = -Wextra -Werror -Wall
+NAME = libftprintf.a
+SRC = src/*.c
+HEAD = includes/
+FLAGS = -c #-Wextra -Werror -Wall
 
 all: $(NAME)
 
 $(NAME):
-	gcc $(FLAGS) -I $(HEAD) $(SRC) -o $(NAME)
-	./$(NAME)
+	@gcc $(FLAGS) $(SRC) -I $(HEAD)
+	@ar rc $(NAME) *.o
 
 clean:
-	/bin/rm -f $(NAME)
+	@/bin/rm -rf *.o
 
-re: clean all
+fclean:	clean
+	@/bin/rm -rf $(NAME)
 
-.PHONY: re clean all
+re: fclean all 

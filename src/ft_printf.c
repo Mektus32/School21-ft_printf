@@ -5,95 +5,54 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ojessi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/06 20:22:31 by ojessi            #+#    #+#             */
-/*   Updated: 2019/05/07 17:15:18 by ojessi           ###   ########.fr       */
+/*   Created: 2019/06/02 14:52:21 by ojessi            #+#    #+#             */
+/*   Updated: 2019/06/02 14:52:22 by ojessi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static	void	ft_fill_array(char *array)
+static	void	init_flag(t_flag *flag)
 {
-
-	array[0] = 'c';//c
-	array[1] = 's';//s
-	array[2] = 'p';//p
-	array[3] = 'd';//d
-	array[4] = 'i';//i
-	array[5] = 'o';//o
-	array[6] = 'u';//u
-	array[7] = 'x';//x
-	array[8] = 'X';//X
-	array[9] = 'f';//f
-	array[10] = 'e';//e
-	array[11] = 'g';//g
-	array[12] = 'b';//b
-	array[13] = 'r';//r
-	array[14] = 'k';//k
-	array[15] = '%';
+	flag->minus = 0;
+	flag->plus = 0;
+	flag->space = 0;
+	flag->hash = 0;
+	flag->zero = 0;
+	flag->quote = 0;
+	flag->dot = 0;
+	flag->weight = -1;
+	flag->prec = -1;
+	flag->negativ = 0;
 }
 
-static	char	*ft_params_arg(const char **format)
+static	void	begin_check(const char *restrict fmt, t_ob *ob)
 {
-	int		i;
-	int		j;
-	char	array[COUNT_ARG];
-	int		len;
-	char	*new;
-
-	ft_fill_array(array);
-	j = 0;
-	len = 0;
-	new = NULL;
-	while ((*format)[++j] != '\0')
-	{
-		i = -1;
-		len++;
-		while (++i < COUNT_ARG)
-			if ((*format)[j] == array[i])
-			{
-				new = ft_strsub(*format, 1, len);
-				*format += len;
-				return (new);
-			}
-	}
-	return (new);
+	ob->i++;
+	init_flag(&(ob->flag));
+	ob->type = type_notype;
+	ob->dollar.dollar = 0;
+	check_args(fmt, ob);
+	choise_specs(fmt, ob);
 }
 
-int		ft_printf(const char *format, ...)
+int				ft_printf(const char *restrict fmt, ...)
 {
-	va_list	ap;
-	char	*str;
+	t_ob	ob;
 
-	va_start(ap, format);
-	while (*format)
+	ob.ret = 0;
+	ob.fd = 1;
+	ob.i = 0;
+	va_start(ob.ap[0], fmt);
+	va_copy(ob.ap[1], ob.ap[0]);
+	while (fmt[ob.i])
 	{
-		if (ft_strncmp(format, "%", 1) == 0)
-		{
-			if ((str = ft_params_arg(&format)) == NULL)
-				exit(0);
-			ft_checkarg(ap, str);
-			free(str);
-		}
+		if (fmt[ob.i] == '{')
+			check_settings(fmt, &ob);
+		else if (fmt[ob.i] == '%')
+			begin_check(fmt, &ob);
 		else
-			ft_putchar(*format);
-		format++;
+			ob.ret += write(ob.fd, &fmt[ob.i++], 1);
 	}
-	va_end(ap);
-	return (0);
-}
-
-int		main(void)
-{
-	//float		a = -0.1012313;//6
-    //int		a = 10;
-    //int		*p = &a;
-	
-	//ft_printf("%.10d kek %2.9s grgerg %f", 200, "lol", 10.19);
-	ft_printf("%#-+0'20.20s", "kekekek");
-	//printf("%20.10d", -01000);
-    // printf("p = %p, x = %x, d = %d", p, p, p);
-	//printf("%1$d:%2$.*3$d:%4$.*3$d\n", 1, 2, 3, 4);//1:002:004
-	//printf("%.d",2);
-	return (0);
+	return (ob.ret);
 }
