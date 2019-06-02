@@ -88,7 +88,8 @@ void	print_int(t_ob *ob, const char *restrict fmt);
 void	init_str_arg(t_ob *ob, char **tmp);
 void	init_char_arg(t_ob *ob, int *c);
 void	init_int_arg(t_ob *ob, long *nbr);
-void	init_double_arg(t_ob *ob, long double *nbr);
+void	init_double_arg(t_ob *ob, double *nbr);
+void	init_long_double_arg(t_ob *ob, long double *nbr);
 void	print_digit(t_ob *ob);
 void	print_unsint(t_ob *ob, char c);
 void	print_base(t_ob *ob, char c);
@@ -96,6 +97,7 @@ void	print_xox(t_ob *ob, char c, long nbr);
 void	print_pointer(t_ob *ob);
 void	print_non_printabl(t_ob *ob);
 void	print_double(t_ob *ob);
+void	print_invalid(t_ob *ob, char c);
 
 
 #endif

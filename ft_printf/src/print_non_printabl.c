@@ -94,3 +94,9 @@ void	print_non_printabl(t_ob *ob)
 		print_next(ob, c);
 	ob->i++;
 }
+
+void	print_invalid(t_ob *ob, char c)
+{
+	ob->ret += write(ob->fd, &c, 1);
+	ob->i++;
+}

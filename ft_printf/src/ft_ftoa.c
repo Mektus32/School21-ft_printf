@@ -18,7 +18,7 @@ char    *ft_ftoa(long double nbr)
     str = ft_strnew(len);
     while (--len >= 0)
     {
-        str[len] = (long)nbr + '0';
+        str[len] = (long)nbr % 10 + '0';
         nbr /= 10;
         if (neg == -1 && len == 1)
         {

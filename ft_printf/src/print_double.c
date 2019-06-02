@@ -63,7 +63,7 @@ static	long	get_num(long double nbr , int prec)
 	return ((long)nbr);
 }
 
-static	void	ftoa(t_ob *ob, long double nbr)
+static	void	ftoa_f(t_ob *ob, long double nbr)
 {
 	char	*tmp;
 	char	*nb;
@@ -73,21 +73,26 @@ static	void	ftoa(t_ob *ob, long double nbr)
 	tmp = ft_ltoa((long)nbr);
 	nbr == 0 ? --ob->flag.prec : 0;
 	prec = ft_strlen(tmp);
-	num = get_num(nbr, ob->flag.prec >= 0 ? ob->flag.prec : 0);
+	num = get_num(nbr, ob->flag.prec >= 0 ? ob->flag.prec : 6);
 	nb = num == 0 ? ft_strdup("0000000") : ft_ftoa(num);
 	if (ob->flag.prec == 0)
 		ob->out = ft_strdup(tmp);
 	else
 		ob->out = get_prec(nb, prec, ob->flag.prec >= 0 ?
 		prec + ob->flag.prec : prec + 6, ob->flag.hash);
+	free(nb);
+	free(tmp);
 }
 
 void    print_double(t_ob *ob)
 {
 	long double		nbr;
+	double			d;
 
-	init_double_arg(ob , &nbr);
-	ftoa(ob, nbr);
+	ob->type == type_L ? init_long_double_arg(ob , &nbr) : 
+	init_double_arg(ob, &d);
+	nbr = ob->type == type_L ? nbr : (long double)d;
+	ftoa_f(ob, nbr);
 	if (ob->flag.minus)
 	{
 		if (nbr > 0 && (ob->flag.plus || ob->flag.space))

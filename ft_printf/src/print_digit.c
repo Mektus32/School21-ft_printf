@@ -13,7 +13,7 @@ void    print_digit(t_ob *ob)
 		ob->out = ft_strdup("");
 	}
 	if (LENA > 0)
-		ob->out = ft_free_strjoin_rev(ft_memset(ft_strnew(LENA), '0', LENA),
+		ob->out = ft_free_strjoin_duo(ft_memset(ft_strnew(LENA), '0', LENA),
 		 ob->out);
 	if (ob->flag.space && !NEG)
 		ob->out = ft_free_strjoin_rev(" ", ob->out);
